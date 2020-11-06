@@ -1,15 +1,16 @@
 import React from "react"
-import {  Text, View,Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import styles from "../../generalStyles"
+import Buttons from "./buttons.js"
+import mainButtonsInfo from "../../mainButtonsInfo"
 
-export default function ({navigation}) {
+export default function ({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('OrderFertilizer')}
-      />
+      {mainButtonsInfo.map(
+        button =>
+          <Buttons title={button.title} name={button.name} navigation={navigation}></Buttons>
+      )}
     </View>
   );
 }
