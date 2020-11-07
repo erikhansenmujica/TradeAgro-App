@@ -1,6 +1,6 @@
-import React from "react"
-import {  Text, View } from 'react-native';
-import styles from "../../generalStyles"
+import React from "react";
+import { Text, View } from "react-native";
+import styles from "../../generalStyles";
 
 export default function () {
   return (

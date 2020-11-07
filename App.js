@@ -1,11 +1,10 @@
-
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from "./components/Home"
-import OrderForm from "./components/OrderForm"
-import Quotas from "./components/Quotas"
-import Market from "./components/Market"
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Home from "./components/Home";
+import OrderForm from "./components/OrderForm";
+import Quotas from "./components/Quotas";
+import Market from "./components/Market";
 
 const Stack = createStackNavigator();
 
