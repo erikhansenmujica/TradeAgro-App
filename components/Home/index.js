@@ -1,9 +1,13 @@
 import React from "react";
-import { View, TouchableHighlight, ImageBackground } from "react-native";
-import { Text } from "../Elements";
-import styles from "../../generalStyles";
+import { View, TouchableHighlight, Image, ImageBackground } from "react-native";
+import generalStyles from "../../generalStyles";
 import mainButtonsInfo from "../../mainButtonsInfo";
+import homeStyles from "./homeStyles";
+import { Text } from "../Elements";
 import background from "../../assets/fondoMovil.png";
+
+const styles = { ...generalStyles, ...homeStyles };
+
 export default function ({ navigation }) {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
@@ -14,7 +18,12 @@ export default function ({ navigation }) {
             onPress={() => navigation.navigate(button.name)}
             key={button.name}
           >
-            <Text content={button.title} />
+            <View>
+              <Image source={button.image} style={styles.images} />
+
+              <Text content={button.title1} />
+              <Text content={button.title2} />
+            </View>
           </TouchableHighlight>
         ))}
       </View>
