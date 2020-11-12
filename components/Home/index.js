@@ -18,10 +18,12 @@ export default function ({ navigation }) {
             onPress={() => navigation.navigate(button.name)}
             key={button.name}
           >
-            <Image source={button.image} style={styles.images} />
+            <View>
+              <Image source={button.image} style={styles.images} />
 
-            <Text content={button.title1} />
-            <Text content={button.title2} />
+              <Text content={button.title1} />
+              <Text content={button.title2} />
+            </View>
           </TouchableHighlight>
         ))}
       </View>
