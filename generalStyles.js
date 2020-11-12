@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     height: "100%",
     width: "100%",
-    fontFamily: "Roboto-Medium",
   },
   ImageBackground: {
     width: "100%",

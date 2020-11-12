@@ -18,6 +18,5 @@ export default StyleSheet.create({
     textAlign: "center",
     color: "#0061AE",
     marginTop: 10,
-    fontFamily:"Roboto-Medium",
   },
 });
