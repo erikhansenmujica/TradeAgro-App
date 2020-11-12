@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 function App() {
   const fonts = useFonts({
-    "Roboto-Medium": require("./assets/Roboto/Roboto-Medium.ttf"),
+    RobotoMedium: require("./assets/Roboto/Roboto-Medium.ttf"),
   });
 
   return fonts ? (
