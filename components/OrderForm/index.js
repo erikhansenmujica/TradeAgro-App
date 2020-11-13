@@ -12,9 +12,10 @@ export default function (props) {
       <View style={styles.container}>
         <View style={styles.OrderContainer}>
           <Text style={styles.Title} content={props.title} />
-          {props.inputs.map((input, i) => (
-            <TextInput placeholder={input.defaultValue} key={i}></TextInput>
-          ))}
+          {props.inputs &&
+            props.inputs.map((input, i) => (
+              <TextInput placeholder={input.defaultValue} key={i}></TextInput>
+            ))}
         </View>
       </View>
     </ImageBackground>
