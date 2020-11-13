@@ -11,7 +11,7 @@ const styles = { ...generalStyles, ...homeStyles };
 export default function ({ navigation }) {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
-      <View style={{ ...styles.container, fontFamily: "Roboto-Medium" }}>
+      <View style={{ ...styles.container }}>
         {mainButtonsInfo.map((button) => (
           <TouchableHighlight
             style={styles.buttons}
