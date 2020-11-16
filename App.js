@@ -13,8 +13,8 @@ import { useFonts } from "expo-font";
 const Stack = createStackNavigator();
 
 function App() {
-  const fonts = useFonts({
-    RobotoMedium: require("./assets/Roboto/Roboto-Medium.ttf"),
+  const [fonts] = useFonts({
+    RobotoMedium: require("./assets/Roboto/Roboto-Regular.ttf"),
   });
 
   return fonts ? (
