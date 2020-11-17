@@ -11,7 +11,6 @@ export default StyleSheet.create({
     backgroundColor: "#fff",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
   },
   Title: {
     fontSize: 35,

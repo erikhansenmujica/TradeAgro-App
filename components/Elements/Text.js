@@ -3,14 +3,14 @@ import { Text } from "react-native";
 
 const fonts = {
   black: "RobotoBlack",
-  medium: "RobotoMedium",
+  medium: "RobotoRegular",
 };
 
 export default ({ style, content, type }) => (
   <Text
     style={{
       ...style,
-      fontFamily: type ? fonts[type] : "RobotoMedium",
+      fontFamily: type ? fonts[type] : "RobotoRegular",
     }}
   >
     {content}
