@@ -13,6 +13,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  HeaderLogo: {
+    width: 170,
+    resizeMode: "contain",
+    height: 120,
+    marginLeft: 20,
+  },
 });
 
 export default styles;
