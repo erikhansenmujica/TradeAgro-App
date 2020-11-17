@@ -1,17 +1,19 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  buttons: {
-    backgroundColor: "beige",
-    borderRadius: 20,
-    height: "20%",
+  touchable:{
+    height: "30%",
     width: "34%",
-    // alignItems: "center",
-    textAlign: "center",
+  },
+  buttons: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    alignItems: "center",
   },
   images: {
     width: "60%",
     height: "60%",
+    resizeMode: "contain",
   },
   texts: {
     fontWeight: "bold",

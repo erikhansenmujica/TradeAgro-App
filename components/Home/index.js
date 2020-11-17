@@ -14,11 +14,11 @@ export default function ({ navigation }) {
       <View style={{ ...styles.container }}>
         {mainButtonsInfo.map((button) => (
           <TouchableHighlight
-            style={styles.buttons}
+            style={styles.touchable}
             onPress={() => navigation.navigate(button.name)}
             key={button.name}
           >
-            <View>
+            <View style={styles.buttons}>
               <Image source={button.image} style={styles.images} />
 
               <Text content={button.title1} />
