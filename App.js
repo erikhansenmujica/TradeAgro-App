@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 
 function App() {
   const [fonts] = useFonts({
-    RobotoMedium: require("./assets/Roboto/Roboto-Regular.ttf"),
+    RobotoRegular: require("./assets/Roboto/Roboto-Regular.ttf"),
     RobotoBlack: require("./assets/Roboto/Roboto-Black.ttf"),
   });
 
@@ -72,15 +72,54 @@ function App() {
               navigation={navigation}
               title="Pedido de Fertilizante"
               inputs={[
-                { defaultValue: "Contrato", type: "Dropdown" },
+                {
+                  defaultValue: "Contrato",
+                  type: "Dropdown",
+                  options: [
+                    "contrato 1",
+                    "contrato 2",
+                    "contrato 3",
+                    "contrato 4",
+                  ],
+                },
                 { type: "Calendar" },
-                { defaultValue: "Cantidad", type: "Dropdown" },
+                {
+                  defaultValue: "Cantidad",
+                  type: "Dropdown",
+                  options: [1, 2, 3, 4],
+                },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="OrderTrucks" component={OrderForm} />
+        <Stack.Screen name="OrderTrucks" >
+          {(navigation) => (
+            <OrderForm
+              navigation={navigation}
+              title="Pedido de Camiones"
+              inputs={[
+                {
+                  defaultValue: "Contrato",
+                  type: "Dropdown",
+                  options: [
+                    "contrato 1",
+                    "contrato 2",
+                    "contrato 3",
+                    "contrato 4",
+                  ],
+                },
+                { type: "Calendar" },
+                {
+                  defaultValue: "Cantidad",
+                  type: "Dropdown",
+                  options: [1, 2, 3, 4],
+                },
+                { defaultValue: "Observaciones", type: "Input" },
+              ]}
+            />
+          )}
+        </Stack.Screen>
         <Stack.Screen name="CheckQuotas" component={Quotas} />
         <Stack.Screen name="CheckMarket" component={Market} />
       </Stack.Navigator>
