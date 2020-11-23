@@ -12,21 +12,29 @@ export default function ({ navigation }) {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={{ ...styles.container }}>
-        {mainButtonsInfo.map((button) => (
+        {mainButtonsInfo.map((button, index) => (
           <TouchableHighlight
-            style={styles.touchable}
+            style={styles.mainButtons}
             onPress={() => navigation.navigate(button.name)}
-            key={button.name}
+            key={index}
           >
-            <View style={styles.buttons}>
+            <View style={styles.mainButtonsContent}>
               <Image source={button.image} style={styles.images} />
 
-              <Text content={button.title1} />
-              <Text content={button.title2} />
+              <Text style={styles.mainButtonsTexts} content={button.title1} />
+              <Text style={styles.mainButtonsTexts} content={button.title2} />
             </View>
           </TouchableHighlight>
         ))}
       </View>
+      <TouchableHighlight
+        style={styles.inquiriesButton}
+        // onPress={()=>}
+      >
+        <View style={styles.inquiriesButtonContent}>
+          <Text style={styles.inquiriesButtonText} content="CONSULTAS" />
+        </View>
+      </TouchableHighlight>
     </ImageBackground>
   );
 }
