@@ -76,24 +76,30 @@ function App() {
                   defaultValue: "Contrato",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "Contrato 1", value: "contrato 1" },
+                    { label: "Contrato 2", value: "contrato 2" },
+                    { label: "Contrato 3", value: "contrato 3" },
+                    { label: "Contrato 4", value: "contrato 4" },
                   ],
                 },
-                { type: "Calendar" },
+
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1", value: "1" },
+                    { label: "2", value: "2" },
+                    { label: "3", value: "3" },
+                    { label: "4", value: "4" },
+                  ],
                 },
+                { type: "Calendar" },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="OrderTrucks" >
+        <Stack.Screen name="OrderTrucks">
           {(navigation) => (
             <OrderForm
               navigation={navigation}
@@ -120,7 +126,33 @@ function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="CheckQuotas" component={Quotas} />
+        <Stack.Screen name="CheckQuotas">
+          {(navigation) => (
+            <OrderForm
+              navigation={navigation}
+              title="Pedido de Cupos"
+              inputs={[
+                {
+                  defaultValue: "Contrato",
+                  type: "Dropdown",
+                  options: [
+                    "contrato 1",
+                    "contrato 2",
+                    "contrato 3",
+                    "contrato 4",
+                  ],
+                },
+                { type: "Calendar" },
+                {
+                  defaultValue: "Cantidad",
+                  type: "Dropdown",
+                  options: [1, 2, 3, 4],
+                },
+                { defaultValue: "Observaciones", type: "Input" },
+              ]}
+            />
+          )}
+        </Stack.Screen>
         <Stack.Screen name="CheckMarket" component={Market} />
       </Stack.Navigator>
     </NavigationContainer>
