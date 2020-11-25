@@ -14,7 +14,12 @@ import marketInfo from "./marketInfo";
 
 const styles = { ...generalStyles, ...marketStyles };
 
-export default function ({ navigation }) {
+function showData(data, expend) {
+  if (!expend) return `${data.slice(0, 45)}...`;
+  if (expend) return data;
+}
+
+export default function () {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -24,18 +29,27 @@ export default function ({ navigation }) {
               return (
                 <TouchableHighlight
                   style={styles.touchableStyle}
-                  // onPress={()=>navigation.navigate("Home")}
-                  key={index}
+                  onPress={() => {
+                    data.expend = !data.expend;
+                  }}
+                  key={`${index}-${data.expend}`}
                 >
-                  {/* supongo que le tendre que poner un view a cada uno para acomodarlos */}
-                  <View> 
-                    <Text
-                      content={data.dataLeader}
-                      style={styles.dataLeader}
-                    ></Text>
-                    <Text content={data.data} style={styles.data}></Text>
-                    <Text content={data.price}></Text>
-                    <Text content={data.date}></Text>
+                  <View>
+                    <View style={styles.dataLeaderView}>
+                      <Text
+                        content={data.dataLeader}
+                        style={styles.dataLeaderText}
+                      ></Text>
+                    </View>
+                    <View style={styles.dataView}>
+                      <Text
+                        content={showData(data.data, data.expend)}
+                        style={styles.dataText}
+                      ></Text>
+                    </View>
+                    <View style={styles.dateView}>
+                      <Text content={data.date}></Text>
+                    </View>
                   </View>
                 </TouchableHighlight>
               );
