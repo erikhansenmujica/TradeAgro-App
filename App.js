@@ -67,19 +67,19 @@ function App() {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OrderFertilizer">
-          {(navigation) => (
+          {({ navigation }) => (
             <OrderForm
               navigation={navigation}
               title="Pedido de Fertilizante"
               inputs={[
                 {
-                  defaultValue: "Contrato",
+                  defaultValue: "Producto",
                   type: "Dropdown",
                   options: [
-                    { label: "Contrato 1", value: "contrato 1" },
-                    { label: "Contrato 2", value: "contrato 2" },
-                    { label: "Contrato 3", value: "contrato 3" },
-                    { label: "Contrato 4", value: "contrato 4" },
+                    { label: "Producto 1", value: "producto 1" },
+                    { label: "Producto 2", value: "producto 2" },
+                    { label: "Producto 3", value: "producto 3" },
+                    { label: "Producto 4", value: "producto 4" },
                   ],
                 },
 
@@ -100,7 +100,7 @@ function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="OrderTrucks">
-          {(navigation) => (
+          {({ navigation }) => (
             <OrderForm
               navigation={navigation}
               title="Pedido de Camiones"
@@ -127,7 +127,7 @@ function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="CheckQuotas">
-          {(navigation) => (
+          {({ navigation }) => (
             <OrderForm
               navigation={navigation}
               title="Pedido de Cupos"

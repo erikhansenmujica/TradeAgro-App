@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
   OrderContainer: {
-    height: "55%",
+    height: "70%",
     width: "75%",
     borderStyle: "solid",
     borderColor: "#F4F4F4",
@@ -11,12 +11,46 @@ export const s = StyleSheet.create({
     backgroundColor: "#fff",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
   },
   Title: {
     fontSize: 35,
     textAlign: "center",
     color: "#0061AE",
     marginTop: 10,
+  },
+  inquiriesButton: {
+    backgroundColor: "green",
+    height: 60,
+    borderRadius: 7,
+    marginTop: "15%",
+    width: 100,
+    borderColor: "white",
+    borderWidth: 1,
+  },
+  backButton: {
+    backgroundColor: "white",
+    height: 70,
+    borderRadius: 100,
+    marginTop: "15%",
+    width: 70,
+  },
+  inquiriesButtonContent: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  inquiriesButtonText: {
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 20,
+  },
+  viewContainer: {
+    paddingTop: 60,
+    flexDirection: "column",
+    height: "100%",
+    width: "100%",
+    alignItems: "center",
   },
 });
 export const pickerSelectStyles = StyleSheet.create({
@@ -39,15 +73,12 @@ export const pickerSelectStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
-    backgroundColor: "white",
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -55,5 +86,6 @@ export const pickerSelectStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    height: "20%",
   },
 });
