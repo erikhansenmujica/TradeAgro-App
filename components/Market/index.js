@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   ImageBackground,
@@ -20,6 +20,8 @@ function showData(data, expend) {
 }
 
 export default function () {
+  const [somethingHappened, setSomethingHappened] = useState(false);
+ 
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <SafeAreaView style={styles.safeAreaView}>
@@ -30,6 +32,7 @@ export default function () {
                 <TouchableHighlight
                   style={styles.touchableStyle}
                   onPress={() => {
+                    setSomethingHappened(!somethingHappened);
                     data.expend = !data.expend;
                   }}
                   key={`${index}-${data.expend}`}

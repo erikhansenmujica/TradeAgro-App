@@ -67,34 +67,40 @@ function App() {
       >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="OrderFertilizer">
-          {(navigation) => (
+          {({ navigation }) => (
             <OrderForm
               navigation={navigation}
               title="Pedido de Fertilizante"
               inputs={[
                 {
-                  defaultValue: "Contrato",
+                  defaultValue: "Producto",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "Producto 1", value: "producto 1" },
+                    { label: "Producto 2", value: "producto 2" },
+                    { label: "Producto 3", value: "producto 3" },
+                    { label: "Producto 4", value: "producto 4" },
                   ],
                 },
-                { type: "Calendar" },
+
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1", value: "1" },
+                    { label: "2", value: "2" },
+                    { label: "3", value: "3" },
+                    { label: "4", value: "4" },
+                  ],
                 },
+                { type: "Calendar" },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="OrderTrucks" >
-          {(navigation) => (
+        <Stack.Screen name="OrderTrucks">
+          {({ navigation }) => (
             <OrderForm
               navigation={navigation}
               title="Pedido de Camiones"
@@ -120,7 +126,33 @@ function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="CheckQuotas" component={Quotas} />
+        <Stack.Screen name="CheckQuotas">
+          {({ navigation }) => (
+            <OrderForm
+              navigation={navigation}
+              title="Pedido de Cupos"
+              inputs={[
+                {
+                  defaultValue: "Contrato",
+                  type: "Dropdown",
+                  options: [
+                    "contrato 1",
+                    "contrato 2",
+                    "contrato 3",
+                    "contrato 4",
+                  ],
+                },
+                { type: "Calendar" },
+                {
+                  defaultValue: "Cantidad",
+                  type: "Dropdown",
+                  options: [1, 2, 3, 4],
+                },
+                { defaultValue: "Observaciones", type: "Input" },
+              ]}
+            />
+          )}
+        </Stack.Screen>
         <Stack.Screen name="CheckMarket" component={Market} />
       </Stack.Navigator>
     </NavigationContainer>
