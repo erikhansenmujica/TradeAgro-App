@@ -10,7 +10,7 @@ export default StyleSheet.create({
   safeAreaView: { marginBottom: "20%" },
   dataLeaderView: { marginTop: "3%", marginLeft: "6%" },
   dataLeaderText: { color: "#0061AE" },
-  dataView: { marginLeft: "6%" },
+  dataView: { marginLeft: "6%",marginRight:"3%" },
   dataText: { fontWeight: "bold" },
   dateView: { alignItems: "flex-end", marginRight: "5%", marginBottom: "3%" },
 });
