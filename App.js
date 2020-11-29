@@ -11,6 +11,8 @@ import { Button, Image, View } from "react-native";
 import { logo } from "./assets/icons";
 import style from "./generalStyles";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import logIn from "./components/LogIn";
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -154,6 +156,7 @@ function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="CheckMarket" component={Market} />
+        <Stack.Screen name="logIn" component={logIn} />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
