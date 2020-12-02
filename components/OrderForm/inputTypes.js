@@ -16,6 +16,8 @@ import { Text } from "../Elements";
 import background from "../../assets/fondoMovil.png";
 import generalStyles from "../../generalStyles";
 import { s } from "./OrderFormStyles";
+import { Platform } from "react-native";
+
 const styles = { ...s, ...generalStyles };
 export default {
   Input: ({ input }) => (
@@ -29,6 +31,20 @@ export default {
         fontSize: 25,
         marginLeft: "3%",
         height: "30%",
+        marginBottom: "10%",
+      }}
+    ></TextInput>
+  ),
+  InputShort: ({ input }) => (
+    <TextInput
+      placeholder={input.defaultValue}
+      multiline={true}
+      style={{
+        width: "90%",
+        borderBottomWidth: 1,
+        borderBottomColor: "#F4F4F4",
+        fontSize: 25,
+        marginLeft: "3%",
         marginBottom: "10%",
       }}
     ></TextInput>
@@ -89,7 +105,7 @@ export default {
             </View>
           </TouchableHighlight>
         </View>
-        {show && (
+        {show && Platform.OS === "ios" && (
           <View
             style={{
               position: "absolute",
@@ -132,6 +148,21 @@ export default {
                 />
               </ImageBackground>
             </Modal>
+          </View>
+        )}
+        {show && Platform !== "ios" && (
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={request.date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+                style={{ marginTop: "55%" }}
+              />
+            </View>
           </View>
         )}
       </View>
