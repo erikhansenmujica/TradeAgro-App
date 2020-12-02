@@ -7,6 +7,7 @@ import background from "../../assets/fondoMovil.png";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import types from "./inputTypes";
+import ListItem from "./ListItem";
 const styles = { ...s, ...generalStyles };
 
 export default function OrderForm(props) {
@@ -14,8 +15,20 @@ export default function OrderForm(props) {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.viewContainer}>
-        <View style={styles.OrderContainer}>
+        <View
+          style={{
+            ...styles.OrderContainer,
+            justifyContent: props.list ? "" : "space-between",
+          }}
+        >
           <Text style={styles.Title} content={props.title} />
+          {props.list && (
+            <View>
+              {props.list.map((item, i) => (
+                <ListItem user={item} />
+              ))}
+            </View>
+          )}
           {props.inputs &&
             props.inputs.map((input, i) => {
               const Input = types[input.type];
@@ -47,14 +60,16 @@ export default function OrderForm(props) {
               <Ionicons name="md-arrow-round-back" size={24} color="#0061AE" />
             </View>
           </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.inquiriesButton}
-            // onPress={()=>}
-          >
-            <View style={styles.inquiriesButtonContent}>
-              <Text style={styles.inquiriesButtonText} content="ENVIAR" />
-            </View>
-          </TouchableHighlight>
+          {props.sendButton && (
+            <TouchableHighlight
+              style={styles.inquiriesButton}
+              // onPress={()=>}
+            >
+              <View style={styles.inquiriesButtonContent}>
+                <Text style={styles.inquiriesButtonText} content="ENVIAR" />
+              </View>
+            </TouchableHighlight>
+          )}
         </View>
       </View>
     </ImageBackground>
