@@ -88,18 +88,13 @@ function App() {
                 },
 
                 {
-                  defaultValue: "Cantidad",
-                  type: "Dropdown",
-                  options: [
-                    { label: "1", value: "1" },
-                    { label: "2", value: "2" },
-                    { label: "3", value: "3" },
-                    { label: "4", value: "4" },
-                  ],
+                  defaultValue: "Cantidad en kilos",
+                  type: "InputShort",
                 },
                 { type: "Calendar" },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
+              sendButton={true}
             />
           )}
         </Stack.Screen>
@@ -127,6 +122,7 @@ function App() {
                 },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
+              sendButton={true}
             />
           )}
         </Stack.Screen>
@@ -135,6 +131,7 @@ function App() {
             <OrderForm
               navigation={navigation}
               title="Pedido de Cupos"
+              sendButton={true}
               inputs={[
                 {
                   defaultValue: "Contrato",
@@ -153,6 +150,24 @@ function App() {
                   options: [1, 2, 3, 4],
                 },
                 { defaultValue: "Observaciones", type: "Input" },
+              ]}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name="Contacts">
+          {({ navigation }) => (
+            <OrderForm
+              navigation={navigation}
+              title="Consultas"
+              sendButton={false}
+              list={[
+                { name: "Juan Caraffo", phone: "+5492262561476" },
+                { name: "Claudio Rivero", phone: "+5492262484006" },
+                { name: "Martin Davico", phone: "+5492262618133" },
+                { name: "Alejandro Ibañez", phone: "+5492262578703" },
+                { name: "Pablo Pizzi", phone: "+5492262574637" },
+                { name: "Carlos Premrou", phone: "+5492262562234" },
+                { name: "Alberto Caraffo", phone: "+5492262567626" },
               ]}
             />
           )}

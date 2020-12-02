@@ -29,10 +29,10 @@ export default function ({ navigation }) {
       </View>
       <TouchableHighlight
         style={styles.inquiriesButton}
-        // onPress={()=>}
+         onPress={()=>navigation.navigate("Contacts")}
       >
         <View style={styles.inquiriesButtonContent}>
-          <Text style={styles.inquiriesButtonText} content="CONSULTAS" />
+          <Text style={styles.inquiriesButtonText} content="CONTACTS" />
         </View>
       </TouchableHighlight>
     </ImageBackground>
