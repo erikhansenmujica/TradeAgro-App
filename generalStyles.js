@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   HeaderLogo: {
-    width: 170,
+    width: 50,
     resizeMode: "contain",
-    height: 120,
-    marginLeft: 20,
+    height: 50,
+    marginLeft: "10%",
+    marginTop: "25%"
   },
 });
 

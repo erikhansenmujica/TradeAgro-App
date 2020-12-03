@@ -26,23 +26,15 @@ function App() {
   return fonts ? (
     <NavigationContainer>
       <Stack.Navigator
-      // initialRouteName={user() ? "home" : "logIn"}
-        headerMode="screen"
+        // initialRouteName={user() ? "home" : "logIn"}
+        // headerMode="screen"
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
             const title = "Carlos Premrou";
             return (
-              <Navbar
-                title={title}
-                options={options}
-                navigation={navigation}
-              />
+              <Navbar title={title} options={options} navigation={navigation} />
             );
-          },
-          headerStyle: {
-            // height: "10%",
-            // display: "flex",
           },
         }}
       >
