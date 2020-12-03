@@ -3,17 +3,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./components/Home";
 import OrderForm from "./components/OrderForm";
-import Quotas from "./components/Quotas";
 import Market from "./components/Market";
 import { Text } from "./components/Elements";
 import { useFonts } from "expo-font";
-import { Button, Image, View } from "react-native";
-import { logo } from "./assets/icons";
-import style from "./generalStyles";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import logIn from "./components/LogIn";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./store/actions/products";
+import Navbar from "./components/Navbar";
 
 const Stack = createStackNavigator();
 
@@ -27,50 +23,18 @@ function App() {
     dispatch(fetchProducts());
   }, []);
   const products = useSelector((state) => state.products.all);
-  console.log(products);
   return fonts ? (
     <NavigationContainer>
       <Stack.Navigator
-        headerMode="screen"
+        // initialRouteName={user() ? "home" : "logIn"}
+        // headerMode="screen"
         screenOptions={{
-          header: ({ scene, previous, navigation }) => {
+          header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
             const title = "Carlos Premrou";
             return (
-              <View
-                title={title}
-                leftButton={
-                  previous ? <Button onPress={navigation.goBack} /> : undefined
-                }
-                style={options.headerStyle}
-              >
-                <View style={{ overflow: "hidden", maxWidth: 57 }}>
-                  <Image source={logo} style={style.HeaderLogo}></Image>
-                </View>
-                <Text
-                  content="Carlos Premrou"
-                  style={{
-                    marginTop: 100,
-                    fontSize: 18,
-                    position: "absolute",
-                    top: -50,
-                    right: 150,
-                  }}
-                  type="black"
-                ></Text>
-                <View style={{ position: "absolute", right: 15, top: 50 }}>
-                  <SimpleLineIcons
-                    name="options-vertical"
-                    size={24}
-                    color="black"
-                  />
-                </View>
-              </View>
+              <Navbar title={title} options={options} navigation={navigation} />
             );
-          },
-          headerStyle: {
-            height: "10%",
-            display: "flex",
           },
         }}
       >
