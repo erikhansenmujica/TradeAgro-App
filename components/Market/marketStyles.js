@@ -8,9 +8,9 @@ export default StyleSheet.create({
     marginBottom: "5%",
   },
   safeAreaView: { marginBottom: "20%" },
-  dataLeaderView: { marginTop: "3%", marginLeft: "6%" },
+  dataLeaderView: { marginTop: "3%", marginLeft: "6%", flexDirection:"row", justifyContent:"space-between" },
   dataLeaderText: { color: "#0061AE" },
-  dataView: { marginLeft: "6%",marginRight:"3%" },
+  dataView: { marginLeft: "6%", marginRight: "3%", marginBottom:"2%", marginTop:"2%" },
   dataText: { fontWeight: "bold" },
   dateView: { alignItems: "flex-end", marginRight: "5%", marginBottom: "3%" },
 });
