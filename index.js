@@ -27,7 +27,6 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
-        // headerMode="screen"
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;

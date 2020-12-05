@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import {
-  Image,
-  View,
-  Platform,
-  TouchableHighlight,
-} from "react-native";
+import { Image, View, Platform, TouchableHighlight } from "react-native";
 import { lonelyLogo } from "../../assets/icons";
 import generalStyles from "../../generalStyles";
 import navbarStyles from "./navbarStyles";
 import { Text } from "../Elements";
 import { SimpleLineIcons } from "@expo/vector-icons";
-
+import { Entypo } from "@expo/vector-icons";
 const style = { ...generalStyles, ...navbarStyles };
 
-function extendedNavBar(navigation) {
+function extendedNavBar(navigation, setExpand) {
   return (
     <View style={style.secondRowNavbar}>
       <View>
@@ -24,7 +19,12 @@ function extendedNavBar(navigation) {
         <Text content="TradeAgro" style={style.textsExtendBar} />
       </View>
 
-      <TouchableHighlight onPress={() => navigation.navigate("logIn")}>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("logIn");
+          setExpand(false);
+        }}
+      >
         <Text content="CERRAR SESIÓN" style={style.logOutText} />
       </TouchableHighlight>
     </View>
@@ -49,10 +49,14 @@ export default function ({ title, navigation }) {
           onPress={() => setExpand(!expand)}
           style={style.thirdROW}
         >
-          <SimpleLineIcons name="options-vertical" size={24} color="black" />
+          {expand ? (
+            <Entypo name="cross" size={24} color="black" />
+          ) : (
+            <SimpleLineIcons name="options-vertical" size={24} color="black" />
+          )}
         </TouchableHighlight>
       </View>
-      {expand && extendedNavBar(navigation)}
+      {expand && extendedNavBar(navigation, setExpand)}
     </View>
   );
 }
