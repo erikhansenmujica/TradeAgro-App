@@ -10,6 +10,7 @@ import logIn from "./components/LogIn";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./store/actions/products";
 import Navbar from "./components/Navbar";
+import { fetchMarkets } from "./store/actions/markets";
 
 const Stack = createStackNavigator();
 
@@ -21,8 +22,12 @@ function App() {
   });
   React.useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(fetchMarkets());
   }, []);
+
   const products = useSelector((state) => state.products.all);
+  const markets = useSelector((state) => state.markets.all);
+
   return fonts ? (
     <NavigationContainer>
       <Stack.Navigator
@@ -135,7 +140,11 @@ function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="CheckMarket" component={Market} />
+        <Stack.Screen name="CheckMarket">
+          {({ navigation }) => (
+            <Market markets={markets} navigation={navigation} />
+          )}
+        </Stack.Screen>
         <Stack.Screen name="logIn" component={logIn} />
       </Stack.Navigator>
     </NavigationContainer>

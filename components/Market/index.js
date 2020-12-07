@@ -11,7 +11,6 @@ import generalStyles from "../../generalStyles";
 import marketStyles from "./marketStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
-import marketInfo from "./marketInfo";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 const styles = { ...generalStyles, ...marketStyles };
@@ -27,14 +26,14 @@ const Icons = ({ user }) => (
   >
     <TouchableHighlight
       onPress={() => {
-        Linking.openURL(`tel:${user.phone}`);
+        Linking.openURL(`tel:${user.celular}`);
       }}
     >
       <MaterialIcons name="phone-forwarded" size={"25%"} color="#006A38" />
     </TouchableHighlight>
     <TouchableHighlight
       onPress={() => {
-        Linking.openURL("http://api.whatsapp.com/send?phone=" + user.phone);
+        Linking.openURL("http://api.whatsapp.com/send?phone=" + user.celular);
       }}
     >
       <Ionicons name="logo-whatsapp" size={"25%"} color="#006A38" />
@@ -47,7 +46,7 @@ function showData(data, expend) {
   if (expend) return data;
 }
 
-export default function () {
+export default function ({ markets }) {
   const [somethingHappened, setSomethingHappened] = useState(false);
 
   return (
@@ -55,7 +54,7 @@ export default function () {
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView>
           <View style={styles.container}>
-            {marketInfo.map((data, index) => {
+            {markets.map((data, index) => {
               return (
                 <TouchableHighlight
                   style={styles.touchableStyle}
@@ -68,19 +67,19 @@ export default function () {
                   <View>
                     <View style={styles.dataLeaderView}>
                       <Text
-                        content={data.dataLeader}
+                        content={data.usuario}
                         style={styles.dataLeaderText}
                       ></Text>
-                      <Icons user={data.user} />
+                      <Icons user={data} />
                     </View>
                     <View style={styles.dataView}>
                       <Text
-                        content={showData(data.data, data.expend)}
+                        content={showData(data.mensaje, data.expend)}
                         style={styles.dataText}
                       ></Text>
                     </View>
                     <View style={styles.dateView}>
-                      <Text content={data.date}></Text>
+                      <Text content={data.fecha}></Text>
                     </View>
                   </View>
                 </TouchableHighlight>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_PRODUCTS } from "../constants";
+import { ADD_PRODUCTS, URL } from "../constants";
 
 const addProducts = (products) => ({
   type: ADD_PRODUCTS,
@@ -8,7 +8,7 @@ const addProducts = (products) => ({
 
 export const fetchProducts = () => (dispatch) =>
   axios
-    .get("http://localhost:3000/products/all")
+    .get(`${URL}/products/all`)
     .then((products) => {
       dispatch(addProducts(products.data.productos));
     })
