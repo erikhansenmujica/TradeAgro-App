@@ -6,8 +6,8 @@ const styles = StyleSheet.create(
     columnNavbar: {},
     firstRowNavbar: {
       flexDirection: "row",
-      marginTop: height * 0.027,
-      marginBottom: height * 0.008,
+      marginTop: height * 0.047,
+      marginBottom: height * 0.017,
       alignItems: "center",
       display: "flex",
     },
