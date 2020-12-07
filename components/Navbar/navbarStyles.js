@@ -3,7 +3,7 @@ const { width, height } = Dimensions.get("window");
 
 const styles = StyleSheet.create(
   {
-    columnNavbar: {  },
+    columnNavbar: {},
     firstRowNavbar: {
       flexDirection: "row",
       marginTop: height * 0.047,
@@ -13,8 +13,8 @@ const styles = StyleSheet.create(
     },
     firstROW: {
       width: width * 0.1,
-      marginLeft: width * 0.05,
       height: width * 0.1,
+      marginLeft: width * 0.05,
     },
     titleStyle: { fontSize: 20 },
     logoDeMierda: { resizeMode: "contain", width: "100%", height: "100%" },
@@ -27,8 +27,12 @@ const styles = StyleSheet.create(
       marginLeft: "auto",
     },
     secondRowNavbar: { marginLeft: width * 0.05 },
-    textsExtendBar: { fontWeight: "bold", fontSize: 17 },
-    logOutText: { color: "#0061AE" },
+    textsExtendBar: {
+      fontWeight: "bold",
+      fontSize: 17,
+      marginBottom: height * 0.0005,
+    },
+    logOutText: { color: "#0061AE", marginBottom: height * 0.008 },
   },
   console.log(width, height, "Dimensiones")
 );
