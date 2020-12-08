@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   mainButtons: {
-    height: "28%",
-    width: "34%",
+    height: height * 0.25,
+    width: width * 0.34,
     backgroundColor: "#fff",
     borderRadius: 20,
     marginBottom: "7%",
@@ -11,6 +12,7 @@ export default StyleSheet.create({
   mainButtonsContent: {
     alignItems: "center",
     justifyContent: "flex-end",
+    marginTop: height * 0.02,
   },
   images: {
     width: "60%",
@@ -37,6 +39,20 @@ export default StyleSheet.create({
   },
   inquiriesButtonText: {
     fontWeight: "bold",
+    color: "white",
+  },
+  notificationAlertView: {
+    position: "absolute",
+    backgroundColor: "#006A38",
+    justifyContent: "center",
+    alignItems: "center",
+    width: width * 0.075,
+    height: width * 0.075,
+    borderRadius: 20,
+    top: width * -0.035,
+    left: width * -0.035,
+  },
+  notificationAlertText: {
     color: "white",
   },
 });
