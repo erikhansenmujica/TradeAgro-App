@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   ImageBackground,
@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableHighlight,
   Linking,
+  Dimensions,
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import marketStyles from "./marketStyles";
@@ -14,36 +15,34 @@ import { Text } from "../Elements";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 const styles = { ...generalStyles, ...marketStyles };
+const { width } = Dimensions.get("window");
 
 const Icons = ({ user }) => (
-  <View
-    style={{
-      display: "flex",
-      flexDirection: "row",
-      width: "30%",
-      justifyContent: "space-around",
-    }}
-  >
+  <View style={styles.iconsMarket}>
     <TouchableHighlight
       onPress={() => {
         Linking.openURL(`tel:${user.celular}`);
       }}
     >
-      <MaterialIcons name="phone-forwarded" size={"25%"} color="#006A38" />
+      <MaterialIcons
+        name="phone-forwarded"
+        size={width * 0.065}
+        color="#006A38"
+      />
     </TouchableHighlight>
     <TouchableHighlight
       onPress={() => {
         Linking.openURL("http://api.whatsapp.com/send?phone=" + user.celular);
       }}
     >
-      <Ionicons name="logo-whatsapp" size={"25%"} color="#006A38" />
+      <Ionicons name="logo-whatsapp" size={width * 0.065} color="#006A38" />
     </TouchableHighlight>
   </View>
 );
 
-function showData(data, expend) {
-  if (!expend) return `${data.slice(0, 45)}...`;
-  if (expend) return data;
+function showData(data, expand) {
+  if (!expand) return `${data.slice(0, 45)}...`;
+  if (expand) return data;
 }
 
 export default function ({ markets }) {
@@ -60,9 +59,9 @@ export default function ({ markets }) {
                   style={styles.touchableStyle}
                   onPress={() => {
                     setSomethingHappened(!somethingHappened);
-                    data.expend = !data.expend;
+                    data.expand = !data.expand;
                   }}
-                  key={`${index}-${data.expend}`}
+                  key={`${index}-${data.expand}`}
                 >
                   <View>
                     <View style={styles.dataLeaderView}>
@@ -74,7 +73,7 @@ export default function ({ markets }) {
                     </View>
                     <View style={styles.dataView}>
                       <Text
-                        content={showData(data.mensaje, data.expend)}
+                        content={showData(data.mensaje, data.expand)}
                         style={styles.dataText}
                       ></Text>
                     </View>
