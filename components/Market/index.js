@@ -97,7 +97,12 @@ function showModal(modalVisible, setModalVisible, data) {
   );
 }
 
-function miniMarkets(somethingHappened, setSomethingHappened, data) {
+function miniMarkets(
+  somethingHappened,
+  setSomethingHappened,
+  data,
+  setModalVisible
+) {
   return (
     <TouchableHighlight
       style={styles.touchableStyle}
@@ -148,7 +153,12 @@ export default function ({ markets }) {
               return (
                 <View key={`${index}-${data.expand}`}>
                   {showModal(modalVisible, setModalVisible, data)}
-                  {miniMarkets(somethingHappened, setSomethingHappened, data)}
+                  {miniMarkets(
+                    somethingHappened,
+                    setSomethingHappened,
+                    data,
+                    setModalVisible
+                  )}
                 </View>
               );
             })}
