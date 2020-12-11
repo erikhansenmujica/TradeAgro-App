@@ -52,7 +52,7 @@ export default function ({ navigation }) {
         onPress={() => navigation.navigate("Contacts")}
       >
         <View style={styles.inquiriesButtonContent}>
-          <Text style={styles.inquiriesButtonText} content="CONTACTS" />
+          <Text style={styles.inquiriesButtonText} content="CONTACTOS" />
         </View>
       </TouchableHighlight>
     </ImageBackground>
