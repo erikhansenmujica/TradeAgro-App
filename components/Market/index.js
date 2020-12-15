@@ -15,6 +15,7 @@ import marketStyles from "./marketStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { MaterialIcons, Entypo, Ionicons } from "@expo/vector-icons";
+import { isEmptyString } from "../../generalFunctions";
 
 const styles = { ...generalStyles, ...marketStyles };
 const { width, height } = Dimensions.get("window");
@@ -46,9 +47,9 @@ const Icons = ({ user }) => (
   </View>
 );
 
-function showData(data, expand) {
-  if (!expand) return `${data.slice(0, 45)}...`;
-  if (expand) return data;
+function showData(mensaje, expand) {
+  if (!expand) return `${mensaje.slice(0, 45)}...`;
+  if (expand) return mensaje;
 }
 
 function showModal(modalVisible, setModalVisible, data) {
@@ -97,6 +98,11 @@ function showModal(modalVisible, setModalVisible, data) {
   );
 }
 
+function canShowImage(data) {
+  if (!isEmptyString(data.url_imagen)) return false;
+  return data.expand;
+}
+
 function miniMarkets(
   somethingHappened,
   setSomethingHappened,
@@ -123,12 +129,12 @@ function miniMarkets(
           ></Text>
         </View>
         <View style={styles.bottomBar}>
-          {data.expand && data.url_imagen && (
+          {canShowImage(data) && (
             <TouchableHighlight
               style={styles.viewShowImage}
               onPress={() => setModalVisible(true)}
             >
-              <Text content="VER IMAGEN" style={styles.textsBlue}></Text>
+              <Text content="VER ADJUNTO" style={styles.textsBlue}></Text>
             </TouchableHighlight>
           )}
           <View style={styles.dateView}>
