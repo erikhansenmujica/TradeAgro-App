@@ -16,7 +16,7 @@ export default function OrderForm(props) {
       <View style={styles.viewContainer}>
         <View
           style={{
-            ...styles.OrderContainer,
+            ...styles.whiteContainer,
             justifyContent: "space-between",
           }}
         >
