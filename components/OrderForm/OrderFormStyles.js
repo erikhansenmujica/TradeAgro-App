@@ -1,17 +1,6 @@
 import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
-  OrderContainer: {
-    height: "70%",
-    width: "75%",
-    borderStyle: "solid",
-    borderColor: "#F4F4F4",
-    borderWidth: 1,
-    borderRadius: 40,
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-  },
   Title: {
     fontSize: 35,
     textAlign: "center",
