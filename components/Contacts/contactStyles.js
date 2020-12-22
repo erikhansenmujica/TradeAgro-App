@@ -18,6 +18,10 @@ const contactStyles = StyleSheet.create({
     width: "30%",
     justifyContent: "space-between",
   },
+  viewContainer: {
+    paddingTop: 60,
+    alignItems: "center",
+  },
 });
 
 export default contactStyles;

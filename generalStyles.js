@@ -7,8 +7,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     flexWrap: "wrap",
-    height: "100%",
-    width: "100%",
   },
   ImageBackground: {
     width: "100%",

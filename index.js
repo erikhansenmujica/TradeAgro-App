@@ -123,7 +123,9 @@ function App() {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="Contacts" component={Contacts} />
+        <Stack.Screen name="Contacts">
+          {({ navigation }) => <Contacts navigation={navigation} />}
+        </Stack.Screen>
         <Stack.Screen name="CheckMarket">
           {({ navigation }) => (
             <Market markets={markets} navigation={navigation} />

@@ -10,13 +10,14 @@ import background from "../../assets/fondoMovil.png";
 import generalStyles from "../../generalStyles";
 import contactStyles from "./contactStyles";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import GeneralButton from "../GeneralButton";
 
 const styles = { ...generalStyles, ...contactStyles };
 const { width, height } = Dimensions.get("window");
 
 function itemList(user, index) {
   return (
-    <View style={styles.eachContactRow} index={index}>
+    <View style={styles.eachContactRow} key={index}>
       <Text
         content={user.name}
         style={{
@@ -52,7 +53,7 @@ function itemList(user, index) {
   );
 }
 
-export default function () {
+export default function ({ navigation }) {
   const users = [
     { name: "Juan Caraffo", phone: "+5492262561476" },
     { name: "Claudio Rivero", phone: "+5492262484006" },
@@ -64,11 +65,12 @@ export default function () {
   ];
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
-      <View style={styles.container}>
+      <View style={styles.viewContainer}>
         <View style={styles.whiteContainer}>
           {users && users.map((user, index) => itemList(user, index))}
         </View>
       </View>
+      <GeneralButton navigation={navigation} />
     </ImageBackground>
   );
 }
