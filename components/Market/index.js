@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   ImageBackground,
@@ -14,7 +14,7 @@ import generalStyles from "../../generalStyles";
 import marketStyles from "./marketStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
-import { MaterialIcons, Entypo, Ionicons } from "@expo/vector-icons";
+import { MaterialIcons, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
 import { isEmptyString } from "../../generalFunctions";
 
 const styles = { ...generalStyles, ...marketStyles };
@@ -29,7 +29,7 @@ const Icons = ({ user }) => (
     >
       <MaterialIcons
         name="phone-forwarded"
-        size={((width * height) / 2) * 0.00017}
+        size={((width + height) / 2) * 0.05}
         color="#006A38"
       />
     </TouchableHighlight>
@@ -40,7 +40,7 @@ const Icons = ({ user }) => (
     >
       <Ionicons
         name="logo-whatsapp"
-        size={((width * height) / 2) * 0.00017}
+        size={((width + height) / 2) * 0.05}
         color="#006A38"
       />
     </TouchableHighlight>
@@ -70,7 +70,7 @@ function showModal(modalVisible, setModalVisible, data) {
           >
             <Entypo
               name="cross"
-              size={((width * height) / 2) * 0.00017}
+              size={((width + height) / 2) * 0.05}
               color="black"
             />
           </TouchableHighlight>
@@ -146,14 +146,39 @@ function miniMarkets(
   );
 }
 
+function scrollButton(_scrollView) {
+  console.log(_scrollView.current);
+  return (
+    <View style={styles.scrollButtonView}>
+      <TouchableHighlight
+        onPress={() =>
+          _scrollView.current.scrollToEnd({ // TODO: scrollToEnd --> scrollTo 
+            // x: 0,
+            // y: height * 0.77,
+            animated: true,
+          })
+        }
+        style={styles.touchableButtonView}
+      >
+        <AntDesign
+          name="downcircle"
+          size={((width + height) / 2) * 0.1}
+          color="black"
+        />
+      </TouchableHighlight>
+    </View>
+  );
+}
+
 export default function ({ markets }) {
   const [somethingHappened, setSomethingHappened] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const _scrollView = useRef();
 
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <SafeAreaView style={styles.safeAreaView}>
-        <ScrollView>
+        <ScrollView ref={_scrollView}>
           <View style={styles.container}>
             {markets.map((data, index) => {
               return (
@@ -171,6 +196,7 @@ export default function ({ markets }) {
           </View>
         </ScrollView>
       </SafeAreaView>
+      {scrollButton(_scrollView)}
     </ImageBackground>
   );
 }

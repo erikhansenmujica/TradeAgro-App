@@ -33,7 +33,7 @@ function itemList(user, index) {
         >
           <MaterialIcons
             name="phone-forwarded"
-            size={((width * height) / 2) * 0.00017}
+            size={((width + height) / 2) * 0.05}
             color="#006A38"
           />
         </TouchableHighlight>
@@ -44,7 +44,7 @@ function itemList(user, index) {
         >
           <Ionicons
             name="logo-whatsapp"
-            size={((width * height) / 2) * 0.00017}
+            size={((width + height) / 2) * 0.05}
             color="#006A38"
           />
         </TouchableHighlight>
@@ -67,7 +67,9 @@ export default function ({ navigation }) {
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.viewContainer}>
         <View style={styles.whiteContainer}>
-          {users && users.map((user, index) => itemList(user, index))}
+          {users &&
+            users[0] &&
+            users.map((user, index) => itemList(user, index))}
         </View>
       </View>
       <GeneralButton navigation={navigation} />
