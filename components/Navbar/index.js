@@ -40,7 +40,7 @@ export default function ({ title, navigation }) {
           onPress={() => navigation.navigate("Home")}
           style={style.firstROW}
         >
-          <Image source={lonelyLogo} style={style.logoDeMierda}></Image>
+          <Image source={lonelyLogo} style={style.logoNav}></Image>
         </TouchableHighlight>
         <View style={style.secondROW}>
           <Text content={title} style={style.titleStyle} type="black"></Text>

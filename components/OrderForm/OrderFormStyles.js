@@ -1,48 +1,11 @@
 import { StyleSheet } from "react-native";
 
 export const s = StyleSheet.create({
-  OrderContainer: {
-    height: "70%",
-    width: "75%",
-    borderStyle: "solid",
-    borderColor: "#F4F4F4",
-    borderWidth: 1,
-    borderRadius: 40,
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-  },
   Title: {
     fontSize: 35,
     textAlign: "center",
     color: "#0061AE",
     marginTop: 10,
-  },
-  inquiriesButton: {
-    backgroundColor: "green",
-    height: 60,
-    borderRadius: 7,
-    marginTop: "15%",
-    width: 100,
-    borderColor: "white",
-    borderWidth: 1,
-  },
-  backButton: {
-    backgroundColor: "white",
-    height: 70,
-    borderRadius: 100,
-    marginTop: "15%",
-    width: 70,
-  },
-  inquiriesButtonContent: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-  inquiriesButtonText: {
-    fontWeight: "bold",
-    color: "white",
-    fontSize: 20,
   },
   viewContainer: {
     paddingTop: 60,

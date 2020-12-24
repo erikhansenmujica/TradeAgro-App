@@ -8,7 +8,9 @@ export default StyleSheet.create({
     width: width * 0.8,
     marginBottom: "5%",
   },
-  safeAreaView: { marginBottom: "20%" },
+  safeAreaView: {
+    maxHeight: height * 0.77,
+  },
   dataLeaderView: {
     marginTop: "3%",
     marginLeft: "6%",
@@ -71,5 +73,7 @@ export default StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
   },
-  imagesModal:{ width: "100%", height: "100%", resizeMode: "contain" }
+  imagesModal: { width: "100%", height: "100%", resizeMode: "contain" },
+  scrollButtonView: {  },
+  touchableButtonView: { marginLeft: "auto", marginRight: width * 0.15 },
 });

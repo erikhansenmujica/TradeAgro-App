@@ -17,7 +17,7 @@ const styles = StyleSheet.create(
       marginLeft: width * 0.05,
     },
     titleStyle: { fontSize: 20 },
-    logoDeMierda: { resizeMode: "contain", width: "100%", height: "100%" },
+    logoNav: { resizeMode: "contain", width: "100%", height: "100%" },
     secondROW: {
       //   width: width * 0.6,
       marginLeft: width * 0.02,

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./store/actions/products";
 import Navbar from "./components/Navbar";
 import { fetchMarkets } from "./store/actions/markets";
+import Contacts from "./components/Contacts";
 
 const Stack = createStackNavigator();
 
@@ -123,22 +124,7 @@ function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="Contacts">
-          {({ navigation }) => (
-            <OrderForm
-              navigation={navigation}
-              title="Consultas"
-              sendButton={false}
-              list={[
-                { name: "Juan Caraffo", phone: "+5492262561476" },
-                { name: "Claudio Rivero", phone: "+5492262484006" },
-                { name: "Martin Davico", phone: "+5492262618133" },
-                { name: "Alejandro Ibañez", phone: "+5492262578703" },
-                { name: "Pablo Pizzi", phone: "+5492262574637" },
-                { name: "Carlos Premrou", phone: "+5492262562234" },
-                { name: "Alberto Caraffo", phone: "+5492262567626" },
-              ]}
-            />
-          )}
+          {({ navigation }) => <Contacts navigation={navigation} />}
         </Stack.Screen>
         <Stack.Screen name="CheckMarket">
           {({ navigation }) => (
