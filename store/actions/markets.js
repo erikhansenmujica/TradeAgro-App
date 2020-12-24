@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ADD_MARKETS, URL } from "../constants";
 
-const addMarkets = (markets) => ({
+export const addMarkets = (markets) => ({
   type: ADD_MARKETS,
   payload: markets,
 });
