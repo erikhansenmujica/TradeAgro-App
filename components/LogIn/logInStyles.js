@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   logInContainer: {
     backgroundColor: "white",
-    width: "75%",
-    height: "50%",
+    width: width * 0.7,
+    height: height * 0.4,
     borderRadius: 20,
     alignItems: "center",
   },
