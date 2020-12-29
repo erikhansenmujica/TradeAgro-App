@@ -7,6 +7,7 @@ import Market from "./components/Market";
 import { Text } from "./components/Elements";
 import { useFonts } from "expo-font";
 import logIn from "./components/LogIn";
+import Register from "./components/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "./store/actions/products";
 import Navbar from "./components/Navbar";
@@ -31,12 +32,15 @@ function App() {
   const [notification, setNotification] = React.useState(false);
   const notificationListener = React.useRef();
   const responseListener = React.useRef();
-
   React.useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchMarkets());
+
     registerForPushNotificationsAsync()
-      .then((token) => setExpoPushToken(token))
+      .then((token) => {
+        console.log(token);
+        setExpoPushToken(token);
+      })
       .catch(console.log);
 
     // This listener is fired whenever a notification is received while the app is foregrounded
@@ -46,14 +50,17 @@ function App() {
         setNotification(notification);
       }
     );
-
     // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
     responseListener.current = Notifications.addNotificationResponseReceivedListener(
       (response) => {
         console.log(response);
       }
     );
-    setTimeout(() => sendPushNotification(expoPushToken), 5000);
+    socket.on("newMarkets", (data) => {
+      console.log("markets incoming bitch");
+      alert("new markets");
+      dispatch(addMarkets(data));
+    });
     return () => {
       Notifications.removeNotificationSubscription(notificationListener);
       Notifications.removeNotificationSubscription(responseListener);
@@ -63,27 +70,21 @@ function App() {
   const products = useSelector((state) => state.products.all);
   const markets = useSelector((state) => state.markets.all);
 
-  socket.on("connect", () => {
-    // or with emit() and custom event names
-    socket.emit(
-      "salutations",
-      "Hello!",
-      { mr: "john" } //user
-    );
-  });
+  // socket.on("connect", () => {
+  //   // or with emit() and custom event names
+  //   socket.emit(
+  //     "salutations",
+  //     "Hello!",
+  //     { mr: "john" } //user
+  //   );
+  // });
   // handle the event sent with socket.send()
-  socket.on("newMarkets", (data) => {
-    console.log("markets incoming bitch");
-    console.log("expo push token: " + expoPushToken);
-    sendPushNotification(expoPushToken);
-    alert("new markets");
-    dispatch(addMarkets(data));
-  });
 
   return fonts ? (
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
+        initialRouteName={"register"}
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
@@ -183,34 +184,12 @@ function App() {
           )}
         </Stack.Screen>
         <Stack.Screen name="logIn" component={logIn} />
+        <Stack.Screen name="register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (
     <Text content="Loading..."></Text>
   );
-}
-// Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/notifications
-async function sendPushNotification(expoPushToken) {
-  const message = {
-    to: expoPushToken,
-    sound: "default",
-    title: "Nuevas actualizaciones de mercado",
-    body: "Entra a mirar la información del mercado en la app de TradeAgro",
-    data: { data: "goes here" },
-  };
-  try {
-    await fetch("https://exp.host/--/api/v2/push/send", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Accept-encoding": "gzip, deflate",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(message),
-    });
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 async function registerForPushNotificationsAsync() {

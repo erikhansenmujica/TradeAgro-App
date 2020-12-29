@@ -17,7 +17,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+    
+       "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "location"
+        ]}
     },
     "android": {
       "adaptiveIcon": {
