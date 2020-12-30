@@ -74,6 +74,6 @@ export default StyleSheet.create({
     // justifyContent: "center",
   },
   imagesModal: { width: "100%", height: "100%", resizeMode: "contain" },
-  scrollButtonView: {  },
-  touchableButtonView: { marginLeft: "auto", marginRight: width * 0.15 },
+  scrollButtonView: { marginTop: height * 0.015 },
+  touchableButtonView: { marginLeft: "auto", marginRight: width * 0.15, backgroundColor:"white", borderRadius:100 },
 });

@@ -147,23 +147,22 @@ function miniMarkets(
 }
 
 function scrollButton(_scrollView) {
-  console.log(_scrollView.current);
   return (
     <View style={styles.scrollButtonView}>
       <TouchableHighlight
         onPress={() =>
-          _scrollView.current.scrollToEnd({ // TODO: scrollToEnd --> scrollTo 
-            // x: 0,
-            // y: height * 0.77,
+          _scrollView.current.scrollTo({
+            x: 0,
+            y: 0,
             animated: true,
           })
         }
         style={styles.touchableButtonView}
       >
         <AntDesign
-          name="downcircle"
+          name="upcircle"
           size={((width + height) / 2) * 0.1}
-          color="black"
+          color="#006A38"
         />
       </TouchableHighlight>
     </View>
@@ -173,12 +172,17 @@ function scrollButton(_scrollView) {
 export default function ({ markets }) {
   const [somethingHappened, setSomethingHappened] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [yOffset, setYOffset] = useState(0);
   const _scrollView = useRef();
-
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <SafeAreaView style={styles.safeAreaView}>
-        <ScrollView ref={_scrollView}>
+        <ScrollView
+          ref={_scrollView}
+          onScroll={(event) => {
+            setYOffset(event.nativeEvent.contentOffset.y);
+          }}
+        >
           <View style={styles.container}>
             {markets.map((data, index) => {
               return (
@@ -196,7 +200,7 @@ export default function ({ markets }) {
           </View>
         </ScrollView>
       </SafeAreaView>
-      {scrollButton(_scrollView)}
+      {yOffset !== 0 && scrollButton(_scrollView)}
     </ImageBackground>
   );
 }
