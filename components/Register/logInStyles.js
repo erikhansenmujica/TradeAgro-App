@@ -1,10 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   logInContainer: {
     backgroundColor: "white",
-    width: "75%",
-    height: "50%",
+    width: width * 0.7,
     borderRadius: 20,
     alignItems: "center",
   },
@@ -27,6 +28,6 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   textButtonStyle: { fontWeight: "bold", color: "white" },
-  recoverPasswordView: { marginTop: "8%" },
+  recoverPasswordView: { marginTop: "8%", marginBottom:"5%" },
   recoverPasswordText: { color: "#0061AE" },
 });
