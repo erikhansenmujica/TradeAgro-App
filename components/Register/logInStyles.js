@@ -14,7 +14,7 @@ export default StyleSheet.create({
   userView: { width: "78%", marginTop: "7%" },
   textInputLogIn: {
     borderBottomWidth: 1,
-    borderBottomColor: "#F4F4F4",
+
     fontSize: 20,
   },
   passwordView: { width: "78%", marginTop: "7%" },
@@ -28,6 +28,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   textButtonStyle: { fontWeight: "bold", color: "white" },
-  recoverPasswordView: { marginTop: "8%", marginBottom:"5%" },
+  recoverPasswordView: { marginTop: "8%", marginBottom: "5%" },
   recoverPasswordText: { color: "#0061AE" },
+  alertText: { color: "red" },
 });

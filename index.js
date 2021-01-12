@@ -1,6 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
 import Home from "./components/Home";
 import OrderForm from "./components/OrderForm";
 import Market from "./components/Market";
@@ -19,6 +20,9 @@ import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 const socket = io("https://tradeagro-api.herokuapp.com/");
 import Contacts from "./components/Contacts";
+import { URL } from "./store/constants";
+import { getToken } from "./token";
+import JWT from "expo-jwt";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +32,12 @@ function App() {
     RobotoRegular: require("./assets/Roboto/Roboto-Regular.ttf"),
     RobotoBlack: require("./assets/Roboto/Roboto-Black.ttf"),
   });
+  async function tuvieja() {
+    const token = await getToken();
+    console.log(JWT.decode(token, "shhhhh").dataValues);
+  }
+  tuvieja();
+  //if (getToken()) console.log(JWT.decode(getToken(), "shhhhh"));
   const [expoPushToken, setExpoPushToken] = React.useState("");
   const [notification, setNotification] = React.useState(false);
   const notificationListener = React.useRef();
@@ -38,7 +48,7 @@ function App() {
 
     registerForPushNotificationsAsync()
       .then((token) => {
-        console.log(token);
+        axios.post(`${URL}/users/addToken`, { token }).catch(console.log);
         setExpoPushToken(token);
       })
       .catch(console.log);
@@ -84,7 +94,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
-        initialRouteName={"register"}
+        initialRouteName={""}
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
