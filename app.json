@@ -17,7 +17,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+    
+       "infoPlist": {
+        "UIBackgroundModes": [
+          "audio",
+          "fetch",
+          "location"
+        ]}
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +34,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/erikhansenmujica/TradeAgro-App"
   }
 }

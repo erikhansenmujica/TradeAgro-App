@@ -1,3 +1,3 @@
 export function isEmptyString(string) {
-  return string.trim() !== "";
+  return string.length !== 0;
 }

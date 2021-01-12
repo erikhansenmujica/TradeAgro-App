@@ -53,6 +53,7 @@ function showData(mensaje, expand) {
 }
 
 function showModal(modalVisible, setModalVisible, data) {
+  console.log(data.url_imagen);
   return (
     <Modal
       animationType="slide"
@@ -187,7 +188,8 @@ export default function ({ markets }) {
             {markets.map((data, index) => {
               return (
                 <View key={`${index}-${data.expand}`}>
-                  {showModal(modalVisible, setModalVisible, data)}
+                  {canShowImage(data) &&
+                    showModal(modalVisible, setModalVisible, data)}
                   {miniMarkets(
                     somethingHappened,
                     setSomethingHappened,
