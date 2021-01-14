@@ -37,7 +37,7 @@ export default function ({ navigation }) {
       dispatch(addUser(user));
       navigation.navigate(user.access_level ? "Home" : "PendingConfirmation");
     } catch (error) {
-      setErrorMessage(error.message);
+      setErrorMessage("Usuario incorrecto");
     }
   };
   return (

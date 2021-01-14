@@ -16,6 +16,7 @@ import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { MaterialIcons, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
 import { isEmptyString } from "../../generalFunctions";
+import GeneralButton from "../GeneralButton";
 
 const styles = { ...generalStyles, ...marketStyles };
 const { width, height } = Dimensions.get("window");
@@ -53,7 +54,6 @@ function showData(mensaje, expand) {
 }
 
 function showModal(modalVisible, setModalVisible, data) {
-  
   return (
     <Modal
       animationType="slide"
@@ -147,30 +147,33 @@ function miniMarkets(
   );
 }
 
-function scrollButton(_scrollView) {
+function bottomButtons(_scrollView, yOffset, navigation) {
   return (
     <View style={styles.scrollButtonView}>
-      <TouchableHighlight
-        onPress={() =>
-          _scrollView.current.scrollTo({
-            x: 0,
-            y: 0,
-            animated: true,
-          })
-        }
-        style={styles.touchableButtonView}
-      >
-        <AntDesign
-          name="upcircle"
-          size={((width + height) / 2) * 0.1}
-          color="#006A38"
-        />
-      </TouchableHighlight>
+      <GeneralButton navigation={navigation} />
+      {yOffset !== 0 && (
+        <TouchableHighlight
+          onPress={() =>
+            _scrollView.current.scrollTo({
+              x: 0,
+              y: 0,
+              animated: true,
+            })
+          }
+          style={styles.touchableButtonView}
+        >
+          <AntDesign
+            name="upcircle"
+            size={((width + height) / 2) * 0.1}
+            color="#006A38"
+          />
+        </TouchableHighlight>
+      )}
     </View>
   );
 }
 
-export default function ({ markets }) {
+export default function ({ markets, navigation }) {
   const [somethingHappened, setSomethingHappened] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [yOffset, setYOffset] = useState(0);
@@ -202,7 +205,7 @@ export default function ({ markets }) {
           </View>
         </ScrollView>
       </SafeAreaView>
-      {yOffset !== 0 && scrollButton(_scrollView)}
+      {bottomButtons(_scrollView, yOffset, navigation)}
     </ImageBackground>
   );
 }
