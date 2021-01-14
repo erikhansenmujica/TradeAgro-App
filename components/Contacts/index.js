@@ -72,7 +72,9 @@ export default function ({ navigation }) {
             users.map((user, index) => itemList(user, index))}
         </View>
       </View>
-      <GeneralButton navigation={navigation} />
+      <View style={{ marginTop: height * 0.015 }}>
+        <GeneralButton navigation={navigation} center />
+      </View>
     </ImageBackground>
   );
 }

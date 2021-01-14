@@ -4,19 +4,14 @@ const { width, height } = Dimensions.get("window");
 const generalButtonStyles = StyleSheet.create({
   buttonsView: {
     display: "flex",
-    width: "100%",
+    width: width,
     flexDirection: "row",
-    justifyContent: "space-around",
-    // marginTop: "5%",
   },
   inquiriesButton: {
     backgroundColor: "green",
-    height: 60,
+    height: height * 0.07,
     borderRadius: 7,
-    marginTop: "15%",
-    width: 100,
-    borderColor: "white",
-    borderWidth: 1,
+    width: width * 0.25,
   },
   inquiriesButtonContent: {
     alignItems: "center",
@@ -30,10 +25,9 @@ const generalButtonStyles = StyleSheet.create({
   },
   backButton: {
     backgroundColor: "white",
-    height: 70,
+    height: height * 0.07,
     borderRadius: 100,
-    marginTop: "15%",
-    width: 70,
+    width: height * 0.07,
   },
 });
 
