@@ -23,21 +23,19 @@ import Contacts from "./components/Contacts";
 import { URL } from "./store/constants";
 import { getToken } from "./token";
 import JWT from "expo-jwt";
+import { addUser } from "./store/actions/user";
+import PendingConfirmation from "./components/PendingConfirmation";
 
 const Stack = createStackNavigator();
 
 function App() {
   const dispatch = useDispatch();
+
   const [fonts] = useFonts({
     RobotoRegular: require("./assets/Roboto/Roboto-Regular.ttf"),
     RobotoBlack: require("./assets/Roboto/Roboto-Black.ttf"),
   });
-  async function tuvieja() {
-    const token = await getToken();
-    console.log(JWT.decode(token, "shhhhh").dataValues);
-  }
-  tuvieja();
-  //if (getToken()) console.log(JWT.decode(getToken(), "shhhhh"));
+
   const [expoPushToken, setExpoPushToken] = React.useState("");
   const [notification, setNotification] = React.useState(false);
   const notificationListener = React.useRef();
@@ -45,7 +43,11 @@ function App() {
   React.useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchMarkets());
-
+    async function authTokenRequire() {
+      const token = await getToken();
+      if (token) dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
+    }
+    authTokenRequire();
     registerForPushNotificationsAsync()
       .then((token) => {
         axios.post(`${URL}/users/addToken`, { token }).catch(console.log);
@@ -79,7 +81,8 @@ function App() {
 
   const products = useSelector((state) => state.products.all);
   const markets = useSelector((state) => state.markets.all);
-  console.log(products, "prouuuucuuts");
+  const user = useSelector((state) => state.user.data);
+  console.log(user);
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
   //   socket.emit(
@@ -94,18 +97,21 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
-        initialRouteName={""}
+        initialRouteName={
+          user ? (user.access_level ? "" : "PendingConfirmation") : "logIn"
+        }
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
-            const title = "Carlos Premrou";
-            return (
-              <Navbar title={title} options={options} navigation={navigation} />
-            );
+            return <Navbar options={options} navigation={navigation} />;
           },
         }}
       >
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen
+          name="PendingConfirmation"
+          component={PendingConfirmation}
+        />
         <Stack.Screen name="OrderFertilizer">
           {({ navigation }) => (
             <OrderForm
