@@ -157,8 +157,14 @@ export default function ({ navigation }) {
             <Text content="REGISTRARSE" style={styles.textButtonStyle} />
           </TouchableHighlight>
 
-          <TouchableHighlight style={styles.recoverPasswordView}>
-            <Text content="" style={styles.recoverPasswordText} />
+          <TouchableHighlight
+            style={styles.recoverPasswordView}
+            onPress={() => navigation.navigate("logIn")}
+          >
+            <Text
+              content="¿Ya estas registrado? Tocá acá y logeate!"
+              style={styles.recoverPasswordText}
+            />
           </TouchableHighlight>
         </View>
       </View>

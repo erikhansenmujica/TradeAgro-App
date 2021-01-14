@@ -34,7 +34,7 @@ const styles = StyleSheet.create(
     },
     logOutText: { color: "#0061AE", marginBottom: height * 0.008 },
   },
-  console.log(width, height, "Dimensiones")
+  
 );
 
 export default styles;

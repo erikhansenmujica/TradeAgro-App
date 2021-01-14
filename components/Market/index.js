@@ -53,7 +53,7 @@ function showData(mensaje, expand) {
 }
 
 function showModal(modalVisible, setModalVisible, data) {
-  console.log(data.url_imagen);
+  
   return (
     <Modal
       animationType="slide"
