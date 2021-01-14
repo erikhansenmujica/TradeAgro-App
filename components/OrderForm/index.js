@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ImageBackground } from "react-native";
+import { View, ImageBackground, Dimensions } from "react-native";
 import { Text } from "../Elements";
 import generalStyles from "../../generalStyles";
 import { s } from "./OrderFormStyles";
@@ -7,6 +7,7 @@ import background from "../../assets/fondoMovil.png";
 import types from "./inputTypes";
 import GeneralButton from "../GeneralButton";
 const styles = { ...s, ...generalStyles };
+const { height } = Dimensions.get("window");
 
 export default function OrderForm(props) {
   const [request, setRequest] = useState({ date: new Date() });
@@ -34,10 +35,13 @@ export default function OrderForm(props) {
               );
             })}
         </View>
-        <GeneralButton
-          sendButton={props.sendButton}
-          navigation={props.navigation}
-        />
+        <View style={{ marginTop: height * 0.015 }}>
+          <GeneralButton
+            sendButton={props.sendButton}
+            navigation={props.navigation}
+            center
+          />
+        </View>
       </View>
     </ImageBackground>
   );

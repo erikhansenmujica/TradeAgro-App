@@ -1,15 +1,20 @@
 import React from "react";
-import { View, TouchableHighlight } from "react-native";
+import { View, TouchableHighlight, Dimensions } from "react-native";
 import { Text } from "../Elements";
 import { Ionicons } from "@expo/vector-icons";
 import generalStyles from "../../generalStyles";
 import generalButtonStyles from "./generalButtonStyles";
 const styles = { ...generalStyles, ...generalButtonStyles };
+const { width, height } = Dimensions.get("window");
 
 export default function (props) {
   return (
     <View
-      style={styles.buttonsView}
+      style={
+        props.center
+          ? { ...styles.buttonsView, justifyContent: "space-around" }
+          : { ...styles.buttonsView, marginLeft: width * 0.15 }
+      }
     >
       <TouchableHighlight
         style={styles.backButton}

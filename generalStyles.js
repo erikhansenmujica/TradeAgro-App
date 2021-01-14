@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   ImageBackground: {
-    width: "100%",
-    height: "100%",
+    width: width,
+    height: height,
   },
   HeaderLogo: {
     width: 50,

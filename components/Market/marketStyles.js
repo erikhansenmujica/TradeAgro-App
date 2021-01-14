@@ -70,10 +70,16 @@ export default StyleSheet.create({
   imageView: {
     width: width * 0.6,
     height: height * 0.6,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   imagesModal: { width: "100%", height: "100%", resizeMode: "contain" },
-  scrollButtonView: { marginTop: height * 0.015 },
-  touchableButtonView: { marginLeft: "auto", marginRight: width * 0.15, backgroundColor:"white", borderRadius:100 },
+  scrollButtonView: {
+    marginTop: height * 0.015,
+    flexDirection: "row",
+  },
+  touchableButtonView: {
+    marginLeft: "auto",
+    marginRight: width * 0.15,
+    backgroundColor: "white",
+    borderRadius: 100,
+  },
 });
