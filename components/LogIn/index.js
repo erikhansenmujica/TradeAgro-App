@@ -14,11 +14,15 @@ import { logo } from "../../assets/icons/index";
 import { useState } from "react/cjs/react.development";
 import Axios from "axios";
 import { URL } from "../../store/constants";
-import { setToken } from "../../token";
+import { setToken, getToken } from "../../token";
+import { useDispatch } from "react-redux";
+import JWT from "expo-jwt";
+import { addUser } from "../../store/actions/user";
 
 const styles = { ...generalStyles, ...logInStyles };
 
-export default function () {
+export default function ({ navigation }) {
+  const dispatch = useDispatch();
   const [userLogIn, setUserLogIn] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const onChange = (e, name) => {
@@ -26,11 +30,15 @@ export default function () {
   };
   const onSubmit = async () => {
     setErrorMessage("");
-    const res = await Axios.post(`${URL}/users/login`, userLogIn).catch((err) =>
-      setErrorMessage(err.message)
-    );
-    await setToken(res.data.auth_token);
-    navigation.navigate("Home");
+    try {
+      const res = await Axios.post(`${URL}/users/login`, userLogIn);
+      await setToken(res.data.auth_token);
+      const user = JWT.decode(res.data.auth_token, "shhhhh").dataValues;
+      dispatch(addUser(user));
+      navigation.navigate(user.access_level ? "Home" : "PendingConfirmation");
+    } catch (error) {
+      setErrorMessage("Usuario incorrecto");
+    }
   };
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
@@ -73,6 +81,15 @@ export default function () {
           >
             <Text
               content="Olvide mi contraseña"
+              style={styles.recoverPasswordText}
+            />
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.recoverPasswordView}
+            onPress={() => navigation.navigate("register")}
+          >
+            <Text
+              content="No tenés una cuenta? Creá una tocando acá!"
               style={styles.recoverPasswordText}
             />
           </TouchableHighlight>

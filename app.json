@@ -18,13 +18,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-    
-       "infoPlist": {
+      "infoPlist": {
         "UIBackgroundModes": [
           "audio",
           "fetch",
           "location"
-        ]}
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
