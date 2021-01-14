@@ -94,7 +94,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
-        initialRouteName={"register"}
+        initialRouteName={""}
         screenOptions={{
           header: ({ scene, navigation }) => {
             const { options } = scene.descriptor;
