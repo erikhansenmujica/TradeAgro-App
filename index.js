@@ -79,7 +79,7 @@ function App() {
 
   const products = useSelector((state) => state.products.all);
   const markets = useSelector((state) => state.markets.all);
-
+  console.log(products, "prouuuucuuts");
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
   //   socket.emit(
@@ -139,17 +139,22 @@ function App() {
                   defaultValue: "Contrato",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "contrato 1" },
+                    { label: "contrato 2" },
+                    { label: "contrato 3" },
+                    { label: "contrato 4" },
                   ],
                 },
                 { type: "Calendar" },
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1" },
+                    { label: "2" },
+                    { label: "3" },
+                    { label: "4" },
+                  ],
                 },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
@@ -168,17 +173,22 @@ function App() {
                   defaultValue: "Contrato",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "contrato 1" },
+                    { label: "contrato 2" },
+                    { label: "contrato 3" },
+                    { label: "contrato 4" },
                   ],
                 },
                 { type: "Calendar" },
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1" },
+                    { label: "2" },
+                    { label: "3" },
+                    { label: "4" },
+                  ],
                 },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
