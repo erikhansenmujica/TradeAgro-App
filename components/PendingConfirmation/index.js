@@ -54,9 +54,9 @@ export default function ({ navigation }) {
           </View>
           <TouchableHighlight
             style={styles.tryLaterButton}
-            // onPress={() => taria bueno que haga algo esto}
+            onPress={() => navigation.navigate("logIn")}
           >
-            <Text content="Intenta mas tarde!" style={styles.textButtonStyle} />
+            <Text content="Intentá más tarde!" style={styles.textButtonStyle} />
           </TouchableHighlight>
         </View>
       </View>
