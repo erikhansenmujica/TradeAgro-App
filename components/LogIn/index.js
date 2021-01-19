@@ -32,7 +32,7 @@ export default function ({ navigation }) {
     setErrorMessage("");
     try {
       const res = await Axios.post(`${URL}/users/login`, userLogIn);
-      await setToken(res.data.auth_token);
+      if (res.data.auth_token) await setToken(res.data.auth_token);
       const user = JWT.decode(res.data.auth_token, "shhhhh").dataValues;
       dispatch(addUser(user));
       navigation.navigate(user.access_level ? "Home" : "PendingConfirmation");

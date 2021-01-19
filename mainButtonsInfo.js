@@ -24,14 +24,14 @@ const quotas = {
   title2: "Cupos",
   name: "CheckQuotas",
   image: imageQuotas,
-  notifications: "66",
+  notifications: "0",
 };
 const market = {
   title1: "Consultar",
   title2: "Mercado",
   name: "CheckMarket",
   image: imageMarket,
-  notifications: "321",
+  notifications: "0",
 };
 
 const mainButtons = [fertilizer, trucks, quotas, market];

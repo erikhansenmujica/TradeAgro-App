@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import OrderForm from "./components/OrderForm";
 import Market from "./components/Market";
 import { Text } from "./components/Elements";
-import { useFonts } from "expo-font";
+import * as font from "expo-font";
 import logIn from "./components/LogIn";
 import Register from "./components/Register";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,25 +21,35 @@ import * as Permissions from "expo-permissions";
 const socket = io("https://tradeagro-api.herokuapp.com/");
 import Contacts from "./components/Contacts";
 import { URL } from "./store/constants";
-import { getToken } from "./token";
+import { getNotifications, getToken, setNotifications } from "./token";
 import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
 import PendingConfirmation from "./components/PendingConfirmation";
+import { addNotificationsNumber } from "./store/actions/notifications";
+import { AppLoading } from "expo";
 
 const Stack = createStackNavigator();
-
+const loadFonts = async () => {
+  return font.loadAsync({
+    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
+  });
+};
 function App() {
   const dispatch = useDispatch();
-
-  const [fonts] = useFonts({
-    RobotoRegular: require("./assets/Roboto/Roboto-Regular.ttf"),
-    RobotoBlack: require("./assets/Roboto/Roboto-Black.ttf"),
-  });
+  const notificationsNumber = useSelector(
+    (state) => state.notifications.number
+  );
 
   const [expoPushToken, setExpoPushToken] = React.useState("");
   const [notification, setNotification] = React.useState(false);
+  const [fonts, setFonts] = React.useState(false);
   const notificationListener = React.useRef();
   const responseListener = React.useRef();
+
+  async function setNots() {
+    if (notificationsNumber) await setNotifications(notificationsNumber);
+  }
   React.useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchMarkets());
@@ -48,13 +58,18 @@ function App() {
       if (token) dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
     }
     authTokenRequire();
+    async function requireNotificationsNumber() {
+      const notifications = await getNotifications();
+      dispatch(addNotificationsNumber(notifications));
+    }
+    requireNotificationsNumber();
     registerForPushNotificationsAsync()
       .then((token) => {
         axios.post(`${URL}/users/addToken`, { token }).catch(console.log);
         setExpoPushToken(token);
       })
       .catch(console.log);
-
+    loadFonts();
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(
       (notification) => {
@@ -70,10 +85,14 @@ function App() {
     );
     socket.on("newMarkets", (data) => {
       console.log("markets incoming bitch");
+
       alert("new markets");
+
+      dispatch(addNotificationsNumber(true));
       dispatch(addMarkets(data));
     });
     return () => {
+      setNots();
       Notifications.removeNotificationSubscription(notificationListener);
       Notifications.removeNotificationSubscription(responseListener);
     };
@@ -82,6 +101,7 @@ function App() {
   const products = useSelector((state) => state.products.all);
   const markets = useSelector((state) => state.markets.all);
   const user = useSelector((state) => state.user.data);
+
   console.log(user);
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
@@ -92,8 +112,17 @@ function App() {
   //   );
   // });
   // handle the event sent with socket.send()
-
-  return fonts ? (
+  if (!fonts)
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setFonts(true)}
+        onError={(e) => {
+          console.log("@@@@errorrrrrr", e);
+        }}
+      />
+    );
+  return (
     <NavigationContainer>
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
@@ -203,8 +232,6 @@ function App() {
         <Stack.Screen name="register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
-  ) : (
-    <Text content="Loading..."></Text>
   );
 }
 

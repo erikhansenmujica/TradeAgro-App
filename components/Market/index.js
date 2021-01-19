@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   ImageBackground,
@@ -17,6 +17,9 @@ import { Text } from "../Elements";
 import { MaterialIcons, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
 import { isEmptyString } from "../../generalFunctions";
 import GeneralButton from "../GeneralButton";
+import { removeNotifications } from "../../token";
+import { useDispatch } from "react-redux";
+import { addNotificationsNumber } from "../../store/actions/notifications";
 
 const styles = { ...generalStyles, ...marketStyles };
 const { width, height } = Dimensions.get("window");
@@ -174,10 +177,15 @@ function bottomButtons(_scrollView, yOffset, navigation) {
 }
 
 export default function ({ markets, navigation }) {
+  const dispatch = useDispatch();
   const [somethingHappened, setSomethingHappened] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [yOffset, setYOffset] = useState(0);
   const _scrollView = useRef();
+  useEffect(() => {
+    removeNotifications();
+    dispatch(addNotificationsNumber(false));
+  }, []);
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <SafeAreaView style={styles.safeAreaView}>

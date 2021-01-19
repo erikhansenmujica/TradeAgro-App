@@ -2,15 +2,15 @@ import React from "react";
 import { Text } from "react-native";
 
 const fonts = {
-  black: "RobotoBlack",
-  medium: "RobotoRegular",
+  black: "roboto-black",
+  medium: "roboto-regular",
 };
 
 export default ({ style, content, type }) => (
   <Text
     style={{
       ...style,
-      fontFamily: type ? fonts[type] : "RobotoRegular",
+      fontFamily: type ? fonts[type] : "roboto-regular",
     }}
   >
     {content}
