@@ -5,7 +5,7 @@ export default StyleSheet.create({
   logInContainer: {
     backgroundColor: "white",
     width: width * 0.7,
-    height: height * 0.4,
+    height: height * 0.44,
     borderRadius: 20,
     alignItems: "center",
   },
@@ -20,14 +20,14 @@ export default StyleSheet.create({
   passwordView: { width: "78%", marginTop: "7%" },
   logInButton: {
     backgroundColor: "#006A38",
-    width: "76%",
-    height: "9%",
-    marginTop: "13%",
+    width: width * 0.54,
+    height: height * 0.045,
+    marginTop: height * 0.035,
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",
   },
   textButtonStyle: { fontWeight: "bold", color: "white" },
-  recoverPasswordView: { marginTop: "8%" },
+  recoverPasswordView: { marginTop: height * 0.03 },
   recoverPasswordText: { color: "#0061AE" },
 });

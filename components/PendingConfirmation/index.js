@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import generalStyles from "../../generalStyles";
-import logInStyles from "./logInStyles";
+import pendingConfirmationStyles from "./PendingConfirmationStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import JWT from "expo-jwt";
 import { addUser } from "../../store/actions/user";
 
-const styles = { ...generalStyles, ...logInStyles };
+const styles = { ...generalStyles, ...pendingConfirmationStyles };
 
 export default function ({ navigation }) {
   const dispatch = useDispatch();
@@ -46,7 +46,18 @@ export default function ({ navigation }) {
           <View style={styles.iconView}>
             <Image source={logo} style={styles.imageIcon} />
           </View>
-          <Text content="pending confirmation" />
+          <View style={styles.confirmationView}>
+            <Text
+              content="Esperando confirmación, una vez confirmado te llegará un mail y podrás tener acceso a nuestros servicios  "
+              style={styles.confirmationText}
+            />
+          </View>
+          <TouchableHighlight
+            style={styles.tryLaterButton}
+            // onPress={() => taria bueno que haga algo esto}
+          >
+            <Text content="Intenta mas tarde!" style={styles.textButtonStyle} />
+          </TouchableHighlight>
         </View>
       </View>
     </ImageBackground>
