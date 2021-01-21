@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   ImageBackground,
@@ -11,7 +11,6 @@ import logInStyles from "./logInStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
-import { useState } from "react/cjs/react.development";
 import Axios from "axios";
 import { URL } from "../../store/constants";
 import { setToken, getToken } from "../../token";

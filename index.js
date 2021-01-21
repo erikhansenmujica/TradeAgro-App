@@ -1,11 +1,10 @@
-import * as React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
 import Home from "./components/Home";
 import OrderForm from "./components/OrderForm";
 import Market from "./components/Market";
-import { Text } from "./components/Elements";
 import * as font from "expo-font";
 import logIn from "./components/LogIn";
 import Register from "./components/Register";
@@ -26,7 +25,9 @@ import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
 import PendingConfirmation from "./components/PendingConfirmation";
 import { addNotificationsNumber } from "./store/actions/notifications";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
+import { Text } from "react-native";
 
 const Stack = createStackNavigator();
 const loadFonts = async () => {
@@ -41,16 +42,16 @@ function App() {
     (state) => state.notifications.number
   );
 
-  const [expoPushToken, setExpoPushToken] = React.useState("");
-  const [notification, setNotification] = React.useState(false);
-  const [fonts, setFonts] = React.useState(false);
-  const notificationListener = React.useRef();
-  const responseListener = React.useRef();
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const [fonts, setFonts] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
   async function setNots() {
     if (notificationsNumber) await setNotifications(notificationsNumber);
   }
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchMarkets());
     async function authTokenRequire() {
@@ -102,7 +103,6 @@ function App() {
   const markets = useSelector((state) => state.markets.all);
   const user = useSelector((state) => state.user.data);
 
-  console.log(user);
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
   //   socket.emit(
@@ -112,16 +112,13 @@ function App() {
   //   );
   // });
   // handle the event sent with socket.send()
-  if (!fonts)
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setFonts(true)}
-        onError={(e) => {
-          console.log("@@@@errorrrrrr", e);
-        }}
-      />
-    );
+  loadFonts().then(() => {
+    setFonts(true);
+  });
+  if (!fonts) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
