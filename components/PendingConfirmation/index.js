@@ -4,7 +4,6 @@ import {
   ImageBackground,
   Image,
   TouchableHighlight,
-  TextInput,
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import pendingConfirmationStyles from "./PendingConfirmationStyles";
@@ -14,7 +13,7 @@ import { logo } from "../../assets/icons/index";
 import { useState } from "react/cjs/react.development";
 import Axios from "axios";
 import { URL } from "../../store/constants";
-import { setToken, getToken } from "../../token";
+import { setToken, getToken,removeToken } from "../../token";
 import { useDispatch } from "react-redux";
 import JWT from "expo-jwt";
 import { addUser } from "../../store/actions/user";
@@ -54,7 +53,11 @@ export default function ({ navigation }) {
           </View>
           <TouchableHighlight
             style={styles.tryLaterButton}
-            onPress={() => navigation.navigate("logIn")}
+            onPress={async () => {
+              await removeToken(null);
+              dispatch(addUser(null));
+              navigation.navigate("logIn");
+            }}
           >
             <Text content="Intentá más tarde!" style={styles.textButtonStyle} />
           </TouchableHighlight>
