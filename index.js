@@ -25,6 +25,7 @@ import { getToken } from "./token";
 import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
 import PendingConfirmation from "./components/PendingConfirmation";
+import RejectedUser from "./components/RejectedUser";
 
 const Stack = createStackNavigator();
 
@@ -98,7 +99,13 @@ function App() {
       <Stack.Navigator
         // initialRouteName={user() ? "home" : "logIn"}
         initialRouteName={
-          user ? (user.access_level ? "" : "PendingConfirmation") : "logIn"
+          user
+            ? user.access_level == 1
+              ? ""
+              : user.access_level == 2
+              ? "rejectedUser"
+              : "PendingConfirmation"
+            : "logIn"
         }
         screenOptions={{
           header: ({ scene, navigation }) => {
@@ -211,6 +218,7 @@ function App() {
         </Stack.Screen>
         <Stack.Screen name="logIn" component={logIn} />
         <Stack.Screen name="register" component={Register} />
+        <Stack.Screen name="rejectedUser" component={RejectedUser} />
       </Stack.Navigator>
     </NavigationContainer>
   ) : (

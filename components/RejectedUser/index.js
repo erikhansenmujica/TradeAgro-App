@@ -1,43 +1,19 @@
 import React from "react";
-import {
-  View,
-  ImageBackground,
-  Image,
-  TouchableHighlight,
-} from "react-native";
+import { View, ImageBackground, Image, TouchableHighlight } from "react-native";
 import generalStyles from "../../generalStyles";
-import pendingConfirmationStyles from "./PendingConfirmationStyles";
+import rejectedUserStyles from "./rejectedUserStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
-import { useState } from "react/cjs/react.development";
-import Axios from "axios";
-import { URL } from "../../store/constants";
-import { setToken, getToken,removeToken } from "../../token";
-import { useDispatch } from "react-redux";
-import JWT from "expo-jwt";
 import { addUser } from "../../store/actions/user";
+import { removeToken } from "../../token";
+import { useDispatch } from "react-redux";
 
-const styles = { ...generalStyles, ...pendingConfirmationStyles };
+const styles = { ...generalStyles, ...rejectedUserStyles };
 
 export default function ({ navigation }) {
   const dispatch = useDispatch();
-  const [userLogIn, setUserLogIn] = useState({ email: "", password: "" });
-  const [errorMessage, setErrorMessage] = useState("");
-  const onChange = (e, name) => {
-    setUserLogIn({ ...userLogIn, [name]: e });
-  };
-  const onSubmit = async () => {
-    setErrorMessage("");
-    try {
-      const res = await Axios.post(`${URL}/users/login`, userLogIn);
-      await setToken(res.data.auth_token);
-      dispatch(addUser(JWT.decode(res.data.auth_token, "shhhhh").dataValues));
-      navigation.navigate("Home");
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-  };
+
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.container}>
@@ -47,7 +23,7 @@ export default function ({ navigation }) {
           </View>
           <View style={styles.confirmationView}>
             <Text
-              content="Esperando confirmación, una vez confirmado te llegará un mail y podrás tener acceso a nuestros servicios  "
+              content="Lo sentimos! Tu petición ha sido rechazada."
               style={styles.confirmationText}
             />
           </View>
