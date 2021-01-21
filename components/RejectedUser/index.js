@@ -1,26 +1,19 @@
 import React from "react";
-import {
-  View,
-  ImageBackground,
-  Image,
-  TouchableHighlight,
-} from "react-native";
+import { View, ImageBackground, Image, TouchableHighlight } from "react-native";
 import generalStyles from "../../generalStyles";
-import pendingConfirmationStyles from "./PendingConfirmationStyles";
+import rejectedUserStyles from "./rejectedUserStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
-import { useState } from "react/cjs/react.development";
-import Axios from "axios";
-import { URL } from "../../store/constants";
-import { setToken, getToken,removeToken } from "../../token";
-import { useDispatch } from "react-redux";
-import JWT from "expo-jwt";
 import { addUser } from "../../store/actions/user";
+import { removeToken } from "../../token";
+import { useDispatch } from "react-redux";
 
-const styles = { ...generalStyles, ...pendingConfirmationStyles };
+const styles = { ...generalStyles, ...rejectedUserStyles };
 
-export default function () {
+export default function ({ navigation }) {
+  const dispatch = useDispatch();
+
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.container}>
@@ -30,7 +23,7 @@ export default function () {
           </View>
           <View style={styles.confirmationView}>
             <Text
-              content="Esperando confirmación, una vez confirmado te llegará un mail y podrás tener acceso a nuestros servicios  "
+              content="Lo sentimos! Tu petición ha sido rechazada."
               style={styles.confirmationText}
             />
           </View>

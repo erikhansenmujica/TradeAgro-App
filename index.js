@@ -25,9 +25,8 @@ import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
 import PendingConfirmation from "./components/PendingConfirmation";
 import { addNotificationsNumber } from "./store/actions/notifications";
-import AppLoading from "expo-app-loading";
-import * as SplashScreen from "expo-splash-screen";
 import { Text } from "react-native";
+import RejectedUser from "./components/RejectedUser";
 
 const Stack = createStackNavigator();
 const loadFonts = async () => {
@@ -122,9 +121,14 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        // initialRouteName={user() ? "home" : "logIn"}
         initialRouteName={
-          user ? (user.access_level ? "" : "PendingConfirmation") : "logIn"
+          user
+            ? user.access_level == 1
+              ? ""
+              : user.access_level == 2
+              ? "rejectedUser"
+              : "PendingConfirmation"
+            : "logIn"
         }
         screenOptions={{
           header: ({ scene, navigation }) => {
@@ -171,17 +175,22 @@ function App() {
                   defaultValue: "Contrato",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "contrato 1" },
+                    { label: "contrato 2" },
+                    { label: "contrato 3" },
+                    { label: "contrato 4" },
                   ],
                 },
                 { type: "Calendar" },
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1" },
+                    { label: "2" },
+                    { label: "3" },
+                    { label: "4" },
+                  ],
                 },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
@@ -200,17 +209,22 @@ function App() {
                   defaultValue: "Contrato",
                   type: "Dropdown",
                   options: [
-                    "contrato 1",
-                    "contrato 2",
-                    "contrato 3",
-                    "contrato 4",
+                    { label: "contrato 1" },
+                    { label: "contrato 2" },
+                    { label: "contrato 3" },
+                    { label: "contrato 4" },
                   ],
                 },
                 { type: "Calendar" },
                 {
                   defaultValue: "Cantidad",
                   type: "Dropdown",
-                  options: [1, 2, 3, 4],
+                  options: [
+                    { label: "1" },
+                    { label: "2" },
+                    { label: "3" },
+                    { label: "4" },
+                  ],
                 },
                 { defaultValue: "Observaciones", type: "Input" },
               ]}
@@ -227,6 +241,7 @@ function App() {
         </Stack.Screen>
         <Stack.Screen name="logIn" component={logIn} />
         <Stack.Screen name="register" component={Register} />
+        <Stack.Screen name="rejectedUser" component={RejectedUser} />
       </Stack.Navigator>
     </NavigationContainer>
   );

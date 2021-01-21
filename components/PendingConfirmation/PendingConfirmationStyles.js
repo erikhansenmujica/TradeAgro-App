@@ -9,16 +9,23 @@ export default StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
   },
-  iconView: { width: "80%", height: "15%", marginTop: "10%" },
+  iconView: {
+    width: width * 0.58,
+    height: height * 0.08,
+    marginTop: height * 0.02,
+  },
   imageIcon: { height: "100%", width: "100%", resizeMode: "contain" },
-  userView: { width: "78%", marginTop: "7%" },
-
-  passwordView: { width: "78%", marginTop: "7%" },
-  logInButton: {
-    backgroundColor: "#006A38",
-    width: "76%",
-    height: "9%",
-    marginTop: "13%",
+  confirmationView: {
+    marginTop: height * 0.04,
+    marginLeft: width * 0.08,
+    marginRight: width * 0.06,
+  },
+  confirmationText:{ fontWeight: "bold", fontSize: 15, color: "#0061AE" },
+  tryLaterButton: {
+    backgroundColor: "#0061AE",
+    width: width * 0.54,
+    height: height * 0.045,
+    marginTop: height * 0.07,
     borderRadius: 7,
     alignItems: "center",
     justifyContent: "center",

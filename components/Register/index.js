@@ -65,7 +65,7 @@ export default function ({ navigation }) {
         email: false,
         company: false,
       });
-      setMessage("Las contraseñas no son iguales");
+      setMessage("Las contraseñas no coinciden");
     } else {
       setMessage("");
       const newUser = await axios

@@ -48,7 +48,7 @@ export default function ({ navigation }) {
     <View style={style.columnNavbar}>
       <View style={style.firstRowNavbar}>
         <TouchableHighlight
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => user && user.access_level == 1 && navigation.navigate("Home")}
           style={style.firstROW}
         >
           <Image source={lonelyLogo} style={style.logoNav}></Image>
