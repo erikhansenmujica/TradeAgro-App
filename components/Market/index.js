@@ -165,7 +165,7 @@ function bottomButtons(_scrollView, yOffset, navigation) {
           <AntDesign
             name="upcircle"
             size={((width + height) / 2) * 0.1}
-            color="#006A38"
+            color="white"
           />
         </TouchableHighlight>
       )}
