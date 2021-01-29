@@ -2,7 +2,7 @@ import React from "react";
 import {
   View,
   ImageBackground,
-  TouchableHighlight,
+  TouchableOpacity,
   Dimensions,
 } from "react-native";
 import { Text } from "../Elements";
@@ -26,28 +26,30 @@ function itemList(user, index) {
         }}
       />
       <View style={styles.iconsRow}>
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() => {
             Linking.openURL(`tel:${user.phone}`);
           }}
+          activeOpacity={.7}
         >
           <MaterialIcons
             name="phone-forwarded"
             size={((width + height) / 2) * 0.05}
             color="#006A38"
           />
-        </TouchableHighlight>
-        <TouchableHighlight
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={() => {
             Linking.openURL("http://api.whatsapp.com/send?phone=" + user.phone);
           }}
+          activeOpacity={.7}
         >
           <Ionicons
             name="logo-whatsapp"
             size={((width + height) / 2) * 0.05}
             color="#006A38"
           />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
   );

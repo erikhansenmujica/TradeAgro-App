@@ -3,7 +3,7 @@ import {
   View,
   ImageBackground,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import pendingConfirmationStyles from "./PendingConfirmationStyles";
@@ -51,16 +51,17 @@ export default function ({ navigation }) {
               style={styles.confirmationText}
             />
           </View>
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.tryLaterButton}
             onPress={async () => {
               await removeToken(null);
               dispatch(addUser(null));
               navigation.navigate("logIn");
             }}
+            activeOpacity={.7}
           >
             <Text content="Intentá más tarde!" style={styles.textButtonStyle} />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

@@ -3,7 +3,7 @@ import {
   View,
   ImageBackground,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
   TextInput,
 } from "react-native";
 import generalStyles from "../../generalStyles";
@@ -68,31 +68,34 @@ export default function ({ navigation }) {
             content={errorMessage}
             style={{ color: "red", marginTop: "5%", marginBottom: "-5%" }}
           />
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.logInButton}
             onPress={() => onSubmit()}
+            activeOpacity={.7}
           >
             <Text content="INGRESAR" style={styles.textButtonStyle} />
-          </TouchableHighlight>
+          </TouchableOpacity>
 
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.recoverPasswordView}
             //   onPress={()=>}
+            activeOpacity={.7}
           >
             <Text
               content="Olvide mi contraseña"
               style={styles.recoverPasswordText}
             />
-          </TouchableHighlight>
-          <TouchableHighlight
+          </TouchableOpacity>
+          <TouchableOpacity
             style={styles.recoverPasswordView}
             onPress={() => navigation.navigate("register")}
+            activeOpacity={.7}
           >
             <Text
               content="No tenés una cuenta? Creá una tocando acá!"
               style={styles.recoverPasswordText}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>

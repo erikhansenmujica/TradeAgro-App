@@ -10,7 +10,7 @@ import {
   ImageBackground,
   Button,
   Modal,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import { Text } from "../Elements";
 import background from "../../assets/fondoMovil.png";
@@ -83,11 +83,12 @@ export default {
     return (
       <View>
         <View>
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() => {
               setShow(true);
               setModalVisible(!modalVisible);
             }}
+            activeOpacity={.7}
           >
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Text
@@ -103,7 +104,7 @@ export default {
               ></Text>
               <Entypo name="calendar" size={24} color="#cccccc" />
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
         {show && Platform.OS === "ios" && (
           <View

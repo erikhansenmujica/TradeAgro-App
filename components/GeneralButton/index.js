@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableHighlight, Dimensions } from "react-native";
+import { View, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "../Elements";
 import { Ionicons } from "@expo/vector-icons";
 import generalStyles from "../../generalStyles";
@@ -16,23 +16,25 @@ export default function (props) {
           : { ...styles.buttonsView, marginLeft: width * 0.15 }
       }
     >
-      <TouchableHighlight
+      <TouchableOpacity
         style={styles.backButton}
         onPress={() => props.navigation.goBack()}
+        activeOpacity={.7}
       >
         <View style={styles.inquiriesButtonContent}>
           <Ionicons name="md-arrow-round-back" size={24} color="#0061AE" />
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
       {props.sendButton && (
-        <TouchableHighlight
+        <TouchableOpacity
           style={styles.inquiriesButton}
           // onPress={()=>}
+          activeOpacity={.7}
         >
           <View style={styles.inquiriesButtonContent}>
             <Text style={styles.inquiriesButtonText} content="ENVIAR" />
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       )}
     </View>
   );

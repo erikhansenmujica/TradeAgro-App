@@ -4,7 +4,7 @@ import {
   ImageBackground,
   ScrollView,
   SafeAreaView,
-  TouchableHighlight,
+  TouchableOpacity,
   Linking,
   Dimensions,
   Modal,
@@ -23,28 +23,30 @@ const { width, height } = Dimensions.get("window");
 
 const Icons = ({ user }) => (
   <View style={styles.iconsMarket}>
-    <TouchableHighlight
+    <TouchableOpacity
       onPress={() => {
         Linking.openURL(`tel:${user.celular}`);
       }}
+      activeOpacity={.7}
     >
       <MaterialIcons
         name="phone-forwarded"
         size={((width + height) / 2) * 0.05}
         color="#006A38"
       />
-    </TouchableHighlight>
-    <TouchableHighlight
+    </TouchableOpacity>
+    <TouchableOpacity
       onPress={() => {
         Linking.openURL("http://api.whatsapp.com/send?phone=" + user.celular);
       }}
+      activeOpacity={.7}
     >
       <Ionicons
         name="logo-whatsapp"
         size={((width + height) / 2) * 0.05}
         color="#006A38"
       />
-    </TouchableHighlight>
+    </TouchableOpacity>
   </View>
 );
 
@@ -65,16 +67,17 @@ function showModal(modalVisible, setModalVisible, data) {
     >
       <View style={styles.centeredModalView}>
         <View style={styles.modalView}>
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.topModal}
             onPress={() => setModalVisible(false)}
+            activeOpacity={.7}
           >
             <Entypo
               name="cross"
               size={((width + height) / 2) * 0.05}
               color="black"
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
           <View style={styles.imageView}>
             <Image
               source={{
@@ -83,16 +86,17 @@ function showModal(modalVisible, setModalVisible, data) {
               style={styles.imagesModal}
             />
           </View>
-          <TouchableHighlight
+          <TouchableOpacity
             style={{
               marginLeft: "auto",
               marginRight: width * 0.05,
               marginTop: height * 0.02,
             }}
             onPress={() => setModalVisible(false)}
+            activeOpacity={.7}
           >
             <Text content="CERRAR" style={styles.textsBlue}></Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -111,12 +115,13 @@ function miniMarkets(
   setModalVisible
 ) {
   return (
-    <TouchableHighlight
+    <TouchableOpacity
       style={styles.touchableStyle}
       onPress={() => {
         setSomethingHappened(!somethingHappened);
         data.expand = !data.expand;
       }}
+      activeOpacity={.7}
     >
       <View>
         <View style={styles.dataLeaderView}>
@@ -131,19 +136,20 @@ function miniMarkets(
         </View>
         <View style={styles.bottomBar}>
           {canShowImage(data) && (
-            <TouchableHighlight
+            <TouchableOpacity
               style={styles.viewShowImage}
               onPress={() => setModalVisible(true)}
+              activeOpacity={.7}
             >
               <Text content="VER ADJUNTO" style={styles.textsBlue}></Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           )}
           <View style={styles.dateView}>
             <Text content={data.fecha}></Text>
           </View>
         </View>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 
@@ -152,7 +158,7 @@ function bottomButtons(_scrollView, yOffset, navigation) {
     <View style={styles.scrollButtonView}>
       <GeneralButton navigation={navigation} />
       {yOffset !== 0 && (
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() =>
             _scrollView.current.scrollTo({
               x: 0,
@@ -161,13 +167,14 @@ function bottomButtons(_scrollView, yOffset, navigation) {
             })
           }
           style={styles.touchableButtonView}
+          activeOpacity={.7}
         >
           <AntDesign
             name="upcircle"
             size={((width + height) / 2) * 0.1}
-            color="#006A38"
+            color="white"
           />
-        </TouchableHighlight>
+        </TouchableOpacity>
       )}
     </View>
   );

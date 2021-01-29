@@ -79,7 +79,5 @@ export default StyleSheet.create({
   touchableButtonView: {
     marginLeft: "auto",
     marginRight: width * 0.15,
-    backgroundColor: "white",
-    borderRadius: 100,
   },
 });

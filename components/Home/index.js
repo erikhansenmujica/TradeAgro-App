@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableHighlight, Image, ImageBackground } from "react-native";
+import { View, Image, ImageBackground,TouchableOpacity } from "react-native";
 import generalStyles from "../../generalStyles";
 import mainButtonsInfo from "../../mainButtonsInfo";
 import homeStyles from "./homeStyles";
@@ -18,10 +18,11 @@ export default function ({ navigation }) {
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={{ ...styles.container }}>
         {mainButtonsInfo.map((button, index) => (
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.mainButtons}
             onPress={() => navigation.navigate(button.name)}
             key={index}
+            activeOpacity={.7}
           >
             <View>
               {showAlert(button) && (
@@ -44,17 +45,18 @@ export default function ({ navigation }) {
                 <Text style={styles.mainButtonsTexts} content={button.title2} />
               </View>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
         ))}
       </View>
-      <TouchableHighlight
+      <TouchableOpacity
         style={styles.inquiriesButton}
         onPress={() => navigation.navigate("Contacts")}
+        activeOpacity={.7}
       >
         <View style={styles.inquiriesButtonContent}>
           <Text style={styles.inquiriesButtonText} content="CONTACTOS" />
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </ImageBackground>
   );
 }
