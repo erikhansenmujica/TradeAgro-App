@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground, Image, TouchableHighlight } from "react-native";
+import { View, ImageBackground, Image, TouchableOpacity } from "react-native";
 import generalStyles from "../../generalStyles";
 import rejectedUserStyles from "./rejectedUserStyles";
 import background from "../../assets/fondoMovil.png";
@@ -27,16 +27,17 @@ export default function ({ navigation }) {
               style={styles.confirmationText}
             />
           </View>
-          <TouchableHighlight
+          <TouchableOpacity
             style={styles.tryLaterButton}
             onPress={async () => {
               await removeToken(null);
               dispatch(addUser(null));
               navigation.navigate("logIn");
             }}
+            activeOpacity={.7}
           >
             <Text content="Intentá más tarde!" style={styles.textButtonStyle} />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
