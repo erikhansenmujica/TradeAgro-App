@@ -17,9 +17,9 @@ import { addMarkets } from "./store/actions/markets";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
-const socket = io("https://tradeagro-api.herokuapp.com/");
 import Contacts from "./components/Contacts";
 import { URL } from "./store/constants";
+const socket = io(URL);
 import { getNotifications, getToken, setNotifications } from "./token";
 import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
@@ -41,6 +41,9 @@ function App() {
     (state) => state.notifications.number
   );
 
+  const products = useSelector((state) => state.products.all);
+  const markets = useSelector((state) => state.markets.all);
+  const user = useSelector((state) => state.user.data);
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const [fonts, setFonts] = useState(false);
@@ -55,7 +58,16 @@ function App() {
     dispatch(fetchMarkets());
     async function authTokenRequire() {
       const token = await getToken();
-      if (token) dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
+      if (token) {
+        dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
+        loadFonts().then(() => {
+          setFonts(true);
+        });
+      } else {
+        loadFonts().then(() => {
+          setFonts(true);
+        });
+      }
     }
     authTokenRequire();
     async function requireNotificationsNumber() {
@@ -69,7 +81,7 @@ function App() {
         setExpoPushToken(token);
       })
       .catch(console.log);
-    loadFonts();
+
     // This listener is fired whenever a notification is received while the app is foregrounded
     notificationListener.current = Notifications.addNotificationReceivedListener(
       (notification) => {
@@ -91,16 +103,13 @@ function App() {
       dispatch(addNotificationsNumber(true));
       dispatch(addMarkets(data));
     });
+
     return () => {
       setNots();
       Notifications.removeNotificationSubscription(notificationListener);
       Notifications.removeNotificationSubscription(responseListener);
     };
   }, []);
-
-  const products = useSelector((state) => state.products.all);
-  const markets = useSelector((state) => state.markets.all);
-  const user = useSelector((state) => state.user.data);
 
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
@@ -111,9 +120,7 @@ function App() {
   //   );
   // });
   // handle the event sent with socket.send()
-  loadFonts().then(() => {
-    setFonts(true);
-  });
+
   if (!fonts) {
     return <Text>Loading...</Text>;
   }
