@@ -1,12 +1,11 @@
-import * as React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import axios from "axios";
 import Home from "./components/Home";
 import OrderForm from "./components/OrderForm";
 import Market from "./components/Market";
-import { Text } from "./components/Elements";
-import { useFonts } from "expo-font";
+import * as font from "expo-font";
 import logIn from "./components/LogIn";
 import Register from "./components/Register";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,37 +17,64 @@ import { addMarkets } from "./store/actions/markets";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
-const socket = io("https://tradeagro-api.herokuapp.com/");
 import Contacts from "./components/Contacts";
 import { URL } from "./store/constants";
-import { getToken } from "./token";
+const socket = io(URL);
+import { getNotifications, getToken, setNotifications } from "./token";
 import JWT from "expo-jwt";
 import { addUser } from "./store/actions/user";
 import PendingConfirmation from "./components/PendingConfirmation";
+import { addNotificationsNumber } from "./store/actions/notifications";
+import { Text } from "react-native";
 import RejectedUser from "./components/RejectedUser";
 
 const Stack = createStackNavigator();
-
+const loadFonts = async () => {
+  return font.loadAsync({
+    "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "roboto-black": require("./assets/fonts/Roboto-Black.ttf"),
+  });
+};
 function App() {
   const dispatch = useDispatch();
+  const notificationsNumber = useSelector(
+    (state) => state.notifications.number
+  );
 
-  const [fonts] = useFonts({
-    RobotoRegular: require("./assets/Roboto/Roboto-Regular.ttf"),
-    RobotoBlack: require("./assets/Roboto/Roboto-Black.ttf"),
-  });
+  const products = useSelector((state) => state.products.all);
+  const markets = useSelector((state) => state.markets.all);
+  const user = useSelector((state) => state.user.data);
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const [fonts, setFonts] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
-  const [expoPushToken, setExpoPushToken] = React.useState("");
-  const [notification, setNotification] = React.useState(false);
-  const notificationListener = React.useRef();
-  const responseListener = React.useRef();
-  React.useEffect(() => {
+  async function setNots() {
+    if (notificationsNumber) await setNotifications(notificationsNumber);
+  }
+  useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchMarkets());
     async function authTokenRequire() {
       const token = await getToken();
-      if (token) dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
+      if (token) {
+        dispatch(addUser(JWT.decode(token, "shhhhh").dataValues));
+        loadFonts().then(() => {
+          setFonts(true);
+        });
+      } else {
+        loadFonts().then(() => {
+          setFonts(true);
+        });
+      }
     }
     authTokenRequire();
+    async function requireNotificationsNumber() {
+      const notifications = await getNotifications();
+      dispatch(addNotificationsNumber(notifications));
+    }
+    requireNotificationsNumber();
     registerForPushNotificationsAsync()
       .then((token) => {
         axios.post(`${URL}/users/addToken`, { token }).catch(console.log);
@@ -71,19 +97,20 @@ function App() {
     );
     socket.on("newMarkets", (data) => {
       console.log("markets incoming bitch");
+
       alert("new markets");
+
+      dispatch(addNotificationsNumber(true));
       dispatch(addMarkets(data));
     });
+
     return () => {
+      setNots();
       Notifications.removeNotificationSubscription(notificationListener);
       Notifications.removeNotificationSubscription(responseListener);
     };
   }, []);
 
-  const products = useSelector((state) => state.products.all);
-  const markets = useSelector((state) => state.markets.all);
-  const user = useSelector((state) => state.user.data);
-  console.log(user);
   // socket.on("connect", () => {
   //   // or with emit() and custom event names
   //   socket.emit(
@@ -94,10 +121,13 @@ function App() {
   // });
   // handle the event sent with socket.send()
 
-  return fonts ? (
+  if (!fonts) {
+    return <Text>Loading...</Text>;
+  }
+
+  return (
     <NavigationContainer>
       <Stack.Navigator
-        // initialRouteName={user() ? "home" : "logIn"}
         initialRouteName={
           user
             ? user.access_level == 1
@@ -221,8 +251,6 @@ function App() {
         <Stack.Screen name="rejectedUser" component={RejectedUser} />
       </Stack.Navigator>
     </NavigationContainer>
-  ) : (
-    <Text content="Loading..."></Text>
   );
 }
 

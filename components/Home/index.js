@@ -5,15 +5,16 @@ import mainButtonsInfo from "../../mainButtonsInfo";
 import homeStyles from "./homeStyles";
 import { Text } from "../Elements";
 import background from "../../assets/fondoMovil.png";
+import { useSelector } from "react-redux";
 
 const styles = { ...generalStyles, ...homeStyles };
 
 export default function ({ navigation }) {
+  const notifications = useSelector((state) => state.notifications.number);
   function showAlert(button) {
-    if (Number(button.notifications) <= 0) return false;
-    return button.notifications && button.notifications !== "";
+    if (button.name === "CheckMarket" && notifications) return true;
+    return false;
   }
-
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={{ ...styles.container }}>
@@ -28,11 +29,7 @@ export default function ({ navigation }) {
               {showAlert(button) && (
                 <View style={styles.notificationAlertView}>
                   <Text
-                    content={
-                      Number(button.notifications) > 99
-                        ? "+99"
-                        : button.notifications
-                    }
+                    content={Number(notifications) > 99 ? "+99" : notifications}
                     style={styles.notificationAlertText}
                   />
                 </View>

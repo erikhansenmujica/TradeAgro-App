@@ -4,11 +4,10 @@
     "slug": "tradeagro",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/LONELYLOGO.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/fondoMovil.png",
+      "resizeMode": "contain"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,6 +16,8 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.tradeagro.tradeagro",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": [
@@ -27,13 +28,15 @@
       }
     },
     "android": {
+      "package": "com.tradeagro.tradeagro",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/LONELYLOGO.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icons/LONELYLOGO.png"
     },
     "description": "",
     "githubUrl": "https://github.com/erikhansenmujica/TradeAgro-App"

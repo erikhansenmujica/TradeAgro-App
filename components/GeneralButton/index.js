@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "../Elements";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import generalStyles from "../../generalStyles";
 import generalButtonStyles from "./generalButtonStyles";
 const styles = { ...generalStyles, ...generalButtonStyles };
@@ -22,7 +23,7 @@ export default function (props) {
         activeOpacity={.7}
       >
         <View style={styles.inquiriesButtonContent}>
-          <Ionicons name="md-arrow-round-back" size={24} color="#0061AE" />
+          <AntDesign name="arrowleft" size={24} color="#0061AE" />
         </View>
       </TouchableOpacity>
       {props.sendButton && (
