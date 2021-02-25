@@ -70,12 +70,12 @@ export default function ({ navigation }) {
           <TouchableOpacity
             style={styles.logInButton}
             onPress={() => onSubmit()}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text content="INGRESAR" style={styles.textButtonStyle} />
           </TouchableOpacity>
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.recoverPasswordView}
             //   onPress={()=>}
             activeOpacity={.7}
@@ -84,11 +84,11 @@ export default function ({ navigation }) {
               content="Olvide mi contraseña"
               style={styles.recoverPasswordText}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.recoverPasswordView}
             onPress={() => navigation.navigate("register")}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text
               content="No tenés una cuenta? Creá una tocando acá!"
