@@ -3,12 +3,6 @@ import { StyleSheet, Dimensions } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
-  logInContainer: {
-    backgroundColor: "white",
-    width: width * 0.7,
-    borderRadius: 20,
-    // alignItems: "center",
-  },
   iconView: { width: "80%", height: "15%", marginTop: "8%" },
   imageIcon: { height: "100%", width: "100%", resizeMode: "contain" },
   userView: { width: "78%", marginTop: "7%" },
