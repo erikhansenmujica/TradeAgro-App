@@ -5,15 +5,19 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  SafeAreaView,
+  ScrollView,
+  Dimensions
 } from "react-native";
 import generalStyles from "../../generalStyles";
-import logInStyles from "./logInStyles";
+import registerStyles from "./registerStyles";
 import background from "../../assets/fondoMovil.png";
 import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
 import axios from "axios";
 import { URL } from "../../store/constants";
-const styles = { ...generalStyles, ...logInStyles };
+const { width, height } = Dimensions.get("window");
+const styles = { ...generalStyles, ...registerStyles };
 
 export default function ({ navigation }) {
   const [user, setUser] = useState({
@@ -84,90 +88,108 @@ export default function ({ navigation }) {
     }
   };
 
+  const form = () => {
+    return (
+      <View>
+        <View style={styles.userView}>
+          <TextInput
+            style={{
+              ...styles.textInputLogIn,
+              borderBottomColor: alert.name ? "red" : "#F4F4F4",
+            }}
+            placeholder="Nombre completo"
+            name="name"
+            onChangeText={(e) => onChange(e, "name")}
+          />
+        </View>
+        <View style={styles.userView}>
+          <TextInput
+            style={{
+              ...styles.textInputLogIn,
+              borderBottomColor: alert.email ? "red" : "#F4F4F4",
+            }}
+            placeholder="Email"
+            name="email"
+            onChangeText={(e) => onChange(e, "email")}
+          />
+        </View>
+        <View style={styles.userView}>
+          <TextInput
+            style={{
+              ...styles.textInputLogIn,
+              borderBottomColor: alert.company ? "red" : "#F4F4F4",
+            }}
+            placeholder="Nombre de la empresa"
+            name="company"
+            onChangeText={(e) => onChange(e, "company")}
+          />
+        </View>
+        <View style={styles.passwordView}>
+          <TextInput
+            s
+            style={{
+              ...styles.textInputLogIn,
+              borderBottomColor: alert.password ? "red" : "#F4F4F4",
+            }}
+            placeholder="Contraseña"
+            name="password"
+            secureTextEntry={true}
+            onChangeText={(e) => onChange(e, "password")}
+          />
+        </View>
+        <View style={{ ...styles.passwordView, marginBottom: "7%" }}>
+          <TextInput
+            style={{
+              ...styles.textInputLogIn,
+              borderBottomColor: alert.confPass ? "red" : "#F4F4F4",
+            }}
+            placeholder="Repetir contraseña"
+            secureTextEntry={true}
+            name="confPass"
+            onChangeText={(e) => onChange(e, "confPass")}
+          />
+        </View>
+      </View>
+    );
+  };
+
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.container}>
-        <View style={styles.logInContainer}>
-          <View style={styles.iconView}>
-            <Image source={logo} style={styles.imageIcon} />
-          </View>
-          <View style={styles.userView}>
-            <TextInput
-              style={{
-                ...styles.textInputLogIn,
-                borderBottomColor: alert.name ? "red" : "#F4F4F4",
-              }}
-              placeholder="Nombre completo"
-              name="name"
-              onChangeText={(e) => onChange(e, "name")}
-            />
-          </View>
-          <View style={styles.userView}>
-            <TextInput
-              style={{
-                ...styles.textInputLogIn,
-                borderBottomColor: alert.email ? "red" : "#F4F4F4",
-              }}
-              placeholder="Email"
-              name="email"
-              onChangeText={(e) => onChange(e, "email")}
-            />
-          </View>
-          <View style={styles.userView}>
-            <TextInput
-              style={{
-                ...styles.textInputLogIn,
-                borderBottomColor: alert.company ? "red" : "#F4F4F4",
-              }}
-              placeholder="Nombre de la empresa"
-              name="company"
-              onChangeText={(e) => onChange(e, "company")}
-            />
-          </View>
-          <View style={styles.passwordView}>
-            <TextInput
-              s
-              style={{
-                ...styles.textInputLogIn,
-                borderBottomColor: alert.password ? "red" : "#F4F4F4",
-              }}
-              placeholder="Contraseña"
-              name="password"
-              secureTextEntry={true}
-              onChangeText={(e) => onChange(e, "password")}
-            />
-          </View>
-          <View style={styles.passwordView}>
-            <TextInput
-              style={{
-                ...styles.textInputLogIn,
-                borderBottomColor: alert.confPass ? "red" : "#F4F4F4",
-              }}
-              placeholder="Repetir contraseña"
-              secureTextEntry={true}
-              name="confPass"
-              onChangeText={(e) => onChange(e, "confPass")}
-            />
-          </View>
-          <Text
-            content={message}
-            style={{ color: "red", marginTop: "5%", marginBottom: "-5%" }}
-          />
-          <TouchableOpacity style={styles.logInButton} onPress={onRegister} activeOpacity={.7}>
-            <Text content="REGISTRARSE" style={styles.textButtonStyle} />
-          </TouchableOpacity>
+        <SafeAreaView style={styles.whiteContainer}>
+          <ScrollView>
+            <View
+              style={{ alignItems: "center", marginBottom: height * 0.45 }}
+            >
+              <View style={styles.iconView}>
+                <Image source={logo} style={styles.imageIcon} />
+              </View>
+              {form()}
+              <Text
+                content={message}
+                style={{ color: "red", marginTop: "5%", marginBottom: "-5%" }}
+              />
+              <TouchableOpacity
+                style={styles.registerInButton}
+                onPress={onRegister}
+                activeOpacity={0.7}
+              >
+                <Text content="REGISTRARSE" style={styles.textButtonStyle} />
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.recoverPasswordView}
-            onPress={() => navigation.navigate("logIn")}
-            activeOpacity={.7}
-          >
-            <Text
-              content="¿Ya estas registrado? Tocá acá y logeate!"
-              style={styles.recoverPasswordText}
-            />
-          </TouchableOpacity>
-        </View>
+              <TouchableOpacity
+                style={styles.recoverPasswordView}
+                onPress={() => navigation.navigate("logIn")}
+                activeOpacity={0.7}
+              >
+                <Text
+                  content="¿Ya estas registrado? Tocá acá e ingresa!"
+                  style={styles.recoverPasswordText}
+                />
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
       </View>
     </ImageBackground>
   );
