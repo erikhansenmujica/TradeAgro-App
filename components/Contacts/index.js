@@ -4,6 +4,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  Linking,
 } from "react-native";
 import { Text } from "../Elements";
 import background from "../../assets/fondoMovil.png";
@@ -30,7 +31,7 @@ function itemList(user, index) {
           onPress={() => {
             Linking.openURL(`tel:${user.phone}`);
           }}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <MaterialIcons
             name="phone-forwarded"
@@ -42,7 +43,7 @@ function itemList(user, index) {
           onPress={() => {
             Linking.openURL("http://api.whatsapp.com/send?phone=" + user.phone);
           }}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <Ionicons
             name="logo-whatsapp"

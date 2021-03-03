@@ -183,7 +183,7 @@ export default function ({ navigation }) {
                 activeOpacity={0.7}
               >
                 <Text
-                  content="¿Ya estas registrado? Tocá acá e ingresa!"
+                  content="¿Ya estás registrado? Tocá acá e ingresa!"
                   style={styles.recoverPasswordText}
                 />
               </TouchableOpacity>

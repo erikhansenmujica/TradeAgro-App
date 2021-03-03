@@ -70,7 +70,7 @@ export default function ({ navigation }) {
           <TouchableOpacity
             style={styles.logInButton}
             onPress={() => onSubmit()}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text content="INGRESAR" style={styles.textButtonStyle} />
           </TouchableOpacity>
@@ -86,13 +86,13 @@ export default function ({ navigation }) {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.recoverPasswordView}
+            style={styles.createAccountView}
             onPress={() => navigation.navigate("register")}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text
-              content="No tenés una cuenta? Creá una tocando acá!"
-              style={styles.recoverPasswordText}
+              content="Creá una cuenta tocando acá"
+              style={styles.createAccountText}
             />
           </TouchableOpacity>
         </View>
