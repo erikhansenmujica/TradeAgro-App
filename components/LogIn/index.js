@@ -75,7 +75,7 @@ export default function ({ navigation }) {
             <Text content="INGRESAR" style={styles.textButtonStyle} />
           </TouchableOpacity>
 
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={styles.recoverPasswordView}
             //   onPress={()=>}
             activeOpacity={.7}
@@ -84,15 +84,15 @@ export default function ({ navigation }) {
               content="Olvide mi contraseña"
               style={styles.recoverPasswordText}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <TouchableOpacity
-            style={styles.recoverPasswordView}
+            style={styles.createAccountView}
             onPress={() => navigation.navigate("register")}
             activeOpacity={0.7}
           >
             <Text
-              content="No tenés una cuenta? Creá una tocando acá!"
-              style={styles.recoverPasswordText}
+              content="Creá una cuenta tocando acá"
+              style={styles.createAccountText}
             />
           </TouchableOpacity>
         </View>
