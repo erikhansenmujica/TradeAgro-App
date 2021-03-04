@@ -6,8 +6,9 @@ import {
   TouchableOpacity,
   TextInput,
   SafeAreaView,
+  KeyboardAvoidingView,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import registerStyles from "./registerStyles";
@@ -16,6 +17,8 @@ import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
 import axios from "axios";
 import { URL } from "../../store/constants";
+import KeyboardListener from "react-native-keyboard-listener";
+
 const { width, height } = Dimensions.get("window");
 const styles = { ...generalStyles, ...registerStyles };
 
@@ -28,6 +31,8 @@ export default function ({ navigation }) {
     confPass: "",
   });
   const [message, setMessage] = useState("");
+  const [keyboard, setKeyboard] = useState(false);
+
   const [alert, setAlert] = useState({
     name: false,
     email: false,
@@ -155,12 +160,18 @@ export default function ({ navigation }) {
 
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
-      <View style={styles.container}>
+      <KeyboardListener
+        onWillShow={() => {
+          setKeyboard(true);
+        }}
+        onWillHide={() => {
+          setKeyboard(false);
+        }}
+      />
+      <View style={{...styles.container,marginTop:keyboard?"-35%":"1%"}}>
         <SafeAreaView style={styles.whiteContainer}>
-          <ScrollView>
-            <View
-              style={{ alignItems: "center", marginBottom: height * 0.45 }}
-            >
+          <ScrollView >
+            <View style={{ alignItems: "center", marginBottom: height * 0.45 }}>
               <View style={styles.iconView}>
                 <Image source={logo} style={styles.imageIcon} />
               </View>
