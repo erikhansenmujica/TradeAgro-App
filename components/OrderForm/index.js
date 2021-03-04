@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, ImageBackground, Dimensions } from "react-native";
+import {
+  View,
+  ImageBackground,
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import { Text } from "../Elements";
 import generalStyles from "../../generalStyles";
 import { s } from "./OrderFormStyles";
@@ -14,27 +20,44 @@ export default function OrderForm(props) {
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.viewContainer}>
-        <View
+        {/* <View
           style={{
             ...styles.whiteContainer,
-            justifyContent: "space-between",
+            // justifyContent: "space-between",
           }}
-        >
-          <Text style={styles.Title} content={props.title} />
-          {props.inputs &&
-            props.inputs.map((input, i) => {
-              const Input = types[input.type];
+        > */}
+          <SafeAreaView
+            style={{
+              ...styles.whiteContainer,
+            }}
+          >
+            <ScrollView>
+              <View
+                style={{
+                  justifyContent: "space-between",
+                  height: height * 0.6,
+                  marginBottom: height * 0.361,
+                }}
+              >
+                <Text style={styles.Title} content={props.title} />
+                {props.inputs &&
+                  props.inputs.map((input, i) => {
+                    const Input = types[input.type];
 
-              return (
-                <Input
-                  input={input}
-                  key={i}
-                  setRequest={setRequest}
-                  request={request}
-                />
-              );
-            })}
-        </View>
+                    return (
+                      <Input
+                        input={input}
+                        key={i}
+                        setRequest={setRequest}
+                        request={request}
+                      />
+                    );
+                  })}
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        {/* </View> */}
+
         <View style={{ marginTop: height * 0.015 }}>
           <GeneralButton
             sendButton={props.sendButton}
