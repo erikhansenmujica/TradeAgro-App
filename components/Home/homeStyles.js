@@ -55,4 +55,8 @@ export default StyleSheet.create({
   notificationAlertText: {
     color: "white",
   },
+  proximamente: {
+    color: "#0061AE",
+    marginTop: 10
+  },
 });
