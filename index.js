@@ -42,7 +42,6 @@ function App() {
   );
 
   const products = useSelector((state) => state.products.all);
-  const markets = useSelector((state) => state.markets.all);
   const user = useSelector((state) => state.user.data);
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
@@ -55,7 +54,6 @@ function App() {
   }
   useEffect(() => {
     dispatch(fetchProducts());
-    dispatch(fetchMarkets());
     async function authTokenRequire() {
       const token = await getToken();
       if (token) {
@@ -130,9 +128,9 @@ function App() {
       <Stack.Navigator
         initialRouteName={
           user
-            ? user.access_level == 1
+            ? user.access_level === 1 || 3
               ? ""
-              : user.access_level == 2
+              : user.access_level === 2
               ? "rejectedUser"
               : "PendingConfirmation"
             : "logIn"
@@ -243,7 +241,7 @@ function App() {
         </Stack.Screen>
         <Stack.Screen name="CheckMarket">
           {({ navigation }) => (
-            <Market markets={markets} navigation={navigation} />
+            <Market  navigation={navigation} />
           )}
         </Stack.Screen>
         <Stack.Screen name="logIn" component={logIn} />

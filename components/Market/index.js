@@ -9,6 +9,7 @@ import {
   Dimensions,
   Modal,
   Image,
+  ActivityIndicator
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import marketStyles from "./marketStyles";
@@ -18,8 +19,9 @@ import { MaterialIcons, Entypo, Ionicons, AntDesign } from "@expo/vector-icons";
 import { isEmptyString } from "../../generalFunctions";
 import GeneralButton from "../GeneralButton";
 import { removeNotifications } from "../../token";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNotificationsNumber } from "../../store/actions/notifications";
+import { addMarkets, fetchMarkets } from "../../store/actions/markets";
 
 const styles = { ...generalStyles, ...marketStyles };
 const { width, height } = Dimensions.get("window");
@@ -30,7 +32,7 @@ const Icons = ({ user }) => (
       onPress={() => {
         Linking.openURL(`tel:${user.celular}`);
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <MaterialIcons
         name="phone-forwarded"
@@ -42,7 +44,7 @@ const Icons = ({ user }) => (
       onPress={() => {
         Linking.openURL("http://api.whatsapp.com/send?phone=" + user.celular);
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <Ionicons
         name="logo-whatsapp"
@@ -73,7 +75,7 @@ function showModal(modalVisible, setModalVisible, data) {
           <TouchableOpacity
             style={styles.topModal}
             onPress={() => setModalVisible(false)}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Entypo
               name="cross"
@@ -96,7 +98,7 @@ function showModal(modalVisible, setModalVisible, data) {
               marginTop: height * 0.02,
             }}
             onPress={() => setModalVisible(false)}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text content="CERRAR" style={styles.textsBlue}></Text>
           </TouchableOpacity>
@@ -124,7 +126,7 @@ function miniMarkets(
         setSomethingHappened(!somethingHappened);
         data.expand = !data.expand;
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <View>
         <View style={styles.dataLeaderView}>
@@ -142,7 +144,7 @@ function miniMarkets(
             <TouchableOpacity
               style={styles.viewShowImage}
               onPress={() => setModalVisible(true)}
-              activeOpacity={.7}
+              activeOpacity={0.7}
             >
               <Text content="VER ADJUNTO" style={styles.textsBlue}></Text>
             </TouchableOpacity>
@@ -170,7 +172,7 @@ function bottomButtons(_scrollView, yOffset, navigation) {
             })
           }
           style={styles.touchableButtonView}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <AntDesign
             name="upcircle"
@@ -183,15 +185,17 @@ function bottomButtons(_scrollView, yOffset, navigation) {
   );
 }
 
-export default function ({ markets, navigation }) {
+export default function ({ navigation }) {
   const dispatch = useDispatch();
   const [somethingHappened, setSomethingHappened] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [yOffset, setYOffset] = useState(0);
   const _scrollView = useRef();
+  const markets = useSelector((state) => state.markets.all);
   useEffect(() => {
     removeNotifications();
     dispatch(addNotificationsNumber(false));
+    dispatch(fetchMarkets());
   }, []);
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
@@ -203,7 +207,7 @@ export default function ({ markets, navigation }) {
           }}
         >
           <View style={styles.container}>
-            {markets.map((data, index) => {
+            {markets.length?markets.map((data, index) => {
               return (
                 <View key={`${index}-${data.expand}`}>
                   {canShowImage(data) &&
@@ -216,7 +220,7 @@ export default function ({ markets, navigation }) {
                   )}
                 </View>
               );
-            })}
+            }):<ActivityIndicator></ActivityIndicator>}
           </View>
         </ScrollView>
       </SafeAreaView>

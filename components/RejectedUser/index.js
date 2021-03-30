@@ -7,13 +7,13 @@ import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
 import { addUser } from "../../store/actions/user";
 import { removeToken } from "../../token";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const styles = { ...generalStyles, ...rejectedUserStyles };
 
 export default function ({ navigation }) {
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.user.data);
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.container}>
@@ -24,6 +24,10 @@ export default function ({ navigation }) {
           <View style={styles.confirmationView}>
             <Text
               content="Lo sentimos! Tu petición ha sido rechazada."
+              style={styles.confirmationText}
+            />
+             <Text
+              content={`Razones: ${user.reject_reasons}`}
               style={styles.confirmationText}
             />
           </View>

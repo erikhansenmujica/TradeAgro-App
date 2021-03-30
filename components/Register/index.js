@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Dimensions,
+  Alert
 } from "react-native";
 import generalStyles from "../../generalStyles";
 import registerStyles from "./registerStyles";
@@ -43,6 +44,16 @@ export default function ({ navigation }) {
   const onChange = (e, name) => {
     setUser({ ...user, [name]: e });
   };
+  const createAlert = () =>
+    Alert.alert(
+      "Registro enviado!",
+      "Chequea tu mail, ahí recibirás un mail de confirmación cuando se complete el proceso!",
+      [
+      
+        { text: "OK", onPress: () => navigation.navigate("logIn") },
+      ],
+      { cancelable: false }
+    );
 
   const checker = () => {
     const obj = {
@@ -89,7 +100,10 @@ export default function ({ navigation }) {
             company: false,
           });
         });
-      if (newUser) navigation.navigate("logIn");
+      if (newUser) {
+        navigation.navigate("logIn");
+        createAlert()
+      }
     }
   };
 
@@ -168,9 +182,11 @@ export default function ({ navigation }) {
           setKeyboard(false);
         }}
       />
-      <View style={{...styles.container,marginTop:keyboard?"-35%":"1%"}}>
+      <View
+        style={{ ...styles.container, marginTop: keyboard ? "-35%" : "1%" }}
+      >
         <SafeAreaView style={styles.whiteContainer}>
-          <ScrollView >
+          <ScrollView>
             <View style={{ alignItems: "center", marginBottom: height * 0.45 }}>
               <View style={styles.iconView}>
                 <Image source={logo} style={styles.imageIcon} />
