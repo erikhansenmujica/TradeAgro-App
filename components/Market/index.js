@@ -30,7 +30,7 @@ const Icons = ({ user }) => (
       onPress={() => {
         Linking.openURL(`tel:${user.celular}`);
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <MaterialIcons
         name="phone-forwarded"
@@ -42,7 +42,7 @@ const Icons = ({ user }) => (
       onPress={() => {
         Linking.openURL("http://api.whatsapp.com/send?phone=" + user.celular);
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <Ionicons
         name="logo-whatsapp"
@@ -73,7 +73,7 @@ function showModal(modalVisible, setModalVisible, data) {
           <TouchableOpacity
             style={styles.topModal}
             onPress={() => setModalVisible(false)}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Entypo
               name="cross"
@@ -96,7 +96,7 @@ function showModal(modalVisible, setModalVisible, data) {
               marginTop: height * 0.02,
             }}
             onPress={() => setModalVisible(false)}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <Text content="CERRAR" style={styles.textsBlue}></Text>
           </TouchableOpacity>
@@ -124,7 +124,7 @@ function miniMarkets(
         setSomethingHappened(!somethingHappened);
         data.expand = !data.expand;
       }}
-      activeOpacity={.7}
+      activeOpacity={0.7}
     >
       <View>
         <View style={styles.dataLeaderView}>
@@ -142,7 +142,7 @@ function miniMarkets(
             <TouchableOpacity
               style={styles.viewShowImage}
               onPress={() => setModalVisible(true)}
-              activeOpacity={.7}
+              activeOpacity={0.7}
             >
               <Text content="VER ADJUNTO" style={styles.textsBlue}></Text>
             </TouchableOpacity>
@@ -170,7 +170,7 @@ function bottomButtons(_scrollView, yOffset, navigation) {
             })
           }
           style={styles.touchableButtonView}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <AntDesign
             name="upcircle"
