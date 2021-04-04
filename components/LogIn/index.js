@@ -31,14 +31,11 @@ export default function ({ navigation }) {
     setErrorMessage("");
     try {
       const res = await Axios.post(`${URL}/users/login`, userLogIn);
-      console.log(res.data)
       if (res.data.auth_token) await setToken(res.data.auth_token);
-      console.log(JWT.decode(res.data.auth_token, "shhhhh").dataValues)
       const user = JWT.decode(res.data.auth_token, "shhhhh").dataValues;
       dispatch(addUser(user));
       navigation.navigate(user.access_level ? "Home" : "PendingConfirmation");
     } catch (error) {
-      console.log(error, "@@@@@@@@@@@@@@@@@@@@@@@@")
       setErrorMessage("Usuario incorrecto");
     }
   };

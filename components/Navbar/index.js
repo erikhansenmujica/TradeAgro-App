@@ -33,7 +33,7 @@ function extendedNavBar(navigation, setExpand, user) {
             navigation.navigate("logIn");
             setExpand(false);
           }}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <Text content="CERRAR SESIÓN" style={style.logOutText} />
         </TouchableOpacity>
@@ -49,9 +49,11 @@ export default function ({ navigation }) {
     <View style={style.columnNavbar}>
       <View style={style.firstRowNavbar}>
         <TouchableOpacity
-          onPress={() => user && user.access_level == 1 && navigation.navigate("Home")}
+          onPress={() =>
+            user && user.access_level == 1 && navigation.navigate("Home")
+          }
           style={style.firstROW}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
           <Image source={lonelyLogo} style={style.logoNav}></Image>
         </TouchableOpacity>
@@ -65,13 +67,18 @@ export default function ({ navigation }) {
         <TouchableOpacity
           onPress={() => setExpand(!expand)}
           style={style.thirdROW}
-          activeOpacity={.7}
+          activeOpacity={0.7}
         >
-          {expand ? (
-            <Entypo name="cross" size={24} color="black" />
-          ) : (
-            <SimpleLineIcons name="options-vertical" size={24} color="black" />
-          )}
+          {user &&
+            (expand ? (
+              <Entypo name="cross" size={24} color="black" />
+            ) : (
+              <SimpleLineIcons
+                name="options-vertical"
+                size={24}
+                color="black"
+              />
+            ))}
         </TouchableOpacity>
       </View>
       {expand && extendedNavBar(navigation, setExpand, user)}

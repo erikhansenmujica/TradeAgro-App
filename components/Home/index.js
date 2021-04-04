@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ImageBackground,TouchableOpacity } from "react-native";
+import { View, Image, ImageBackground, TouchableOpacity } from "react-native";
 import generalStyles from "../../generalStyles";
 import mainButtonsInfo from "../../mainButtonsInfo";
 import homeStyles from "./homeStyles";
@@ -20,10 +20,16 @@ export default function ({ navigation }) {
       <View style={{ ...styles.container }}>
         {mainButtonsInfo.map((button, index) => (
           <TouchableOpacity
-            style={styles.mainButtons}
-            onPress={() => navigation.navigate(button.name)}
+            style={
+              button.title2 !== "Mercado"
+                ? { ...styles.mainButtons, backgroundColor: "#B0B0B0" }
+                : styles.mainButtons
+            }
+            onPress={() =>
+              button.title2 === "Mercado" && navigation.navigate(button.name)
+            }
             key={index}
-            activeOpacity={.7}
+            activeOpacity={0.7}
           >
             <View>
               {showAlert(button) && (
@@ -40,6 +46,9 @@ export default function ({ navigation }) {
 
                 <Text style={styles.mainButtonsTexts} content={button.title1} />
                 <Text style={styles.mainButtonsTexts} content={button.title2} />
+                {button.title2 !== "Mercado" && (
+                  <Text style={styles.proximamente} content="Próximamente" />
+                )}
               </View>
             </View>
           </TouchableOpacity>
@@ -48,7 +57,7 @@ export default function ({ navigation }) {
       <TouchableOpacity
         style={styles.inquiriesButton}
         onPress={() => navigation.navigate("Contacts")}
-        activeOpacity={.7}
+        activeOpacity={0.7}
       >
         <View style={styles.inquiriesButtonContent}>
           <Text style={styles.inquiriesButtonText} content="CONTACTOS" />
