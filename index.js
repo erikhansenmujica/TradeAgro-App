@@ -27,6 +27,7 @@ import PendingConfirmation from "./components/PendingConfirmation";
 import { addNotificationsNumber } from "./store/actions/notifications";
 import { Text } from "react-native";
 import RejectedUser from "./components/RejectedUser";
+import PwRecover from "./components/PwRecover";
 
 const Stack = createStackNavigator();
 const loadFonts = async () => {
@@ -122,13 +123,13 @@ function App() {
   if (!fonts) {
     return <Text>Loading...</Text>;
   }
-
+  console.log(user)
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName={
           user
-            ? user.access_level === 1 || 3
+            ? user.access_level === 1 || user.access_level === 3
               ? ""
               : user.access_level === 2
               ? "rejectedUser"
@@ -244,6 +245,7 @@ function App() {
             <Market  navigation={navigation} />
           )}
         </Stack.Screen>
+        <Stack.Screen name="pwRecover" component={PwRecover} />
         <Stack.Screen name="logIn" component={logIn} />
         <Stack.Screen name="register" component={Register} />
         <Stack.Screen name="rejectedUser" component={RejectedUser} />

@@ -12,10 +12,12 @@ import { Text } from "../Elements";
 import { logo } from "../../assets/icons/index";
 import { removeToken } from "../../token";
 import { addUser } from "../../store/actions/user";
+import { useDispatch } from "react-redux";
 
 const styles = { ...generalStyles, ...pendingConfirmationStyles };
 
-export default function () {
+export default function ({ navigation }) {
+  const dispatch= useDispatch()
   return (
     <ImageBackground source={background} style={styles.ImageBackground}>
       <View style={styles.container}>

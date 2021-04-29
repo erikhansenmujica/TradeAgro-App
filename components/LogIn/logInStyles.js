@@ -30,9 +30,7 @@ export default StyleSheet.create({
   textButtonStyle: { fontWeight: "bold", color: "white" },
   recoverPasswordView: { marginTop: height * 0.03 },
   recoverPasswordText: {
-    // color: "#0061AE",
-    color: "grey",
-    textDecorationLine: "line-through",
+    color: "#0061AE",
   },
   createAccountView: { marginTop: height * 0.025 },
   createAccountText: { color: "#0061AE" },
